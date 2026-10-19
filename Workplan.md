@@ -19,7 +19,7 @@ We met up and made an outline on Monday Oct 19:
 
 
 ## Things we want to look at / analyze
-
+- One common script that reads csv files and saves data as ROOT files (Hanna is looking into that.)
 ### 1. Hottest weekend (Saturday + Sunday)
 Responsible for task: Hanna
 
