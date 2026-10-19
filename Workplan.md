@@ -7,7 +7,7 @@ Team members: Jarl Olsson (Release Manager), Yoline Ruiter, Hanna Palm
 We met up and made an outline on Monday Oct 19:
 ![ALT text](images/plan.jpeg)
 
-- Attempt to have some plots by Monday Oct 26.
+- Attempt to have some plots by Monday Oct 26 at 5 pm 
 - Write project report on Tuesday (Oct 27) and Wednesday (Oct 28)
 - Revise everything on Thursday (Oct 29) and hand in project
 - Friday Oct 30: Project presentation! 
