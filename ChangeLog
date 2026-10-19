@@ -13,18 +13,12 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	* Fine grained description of important things that you want to communicate
 
 
-# Example (entries from newest to oldest):
+# CHANGELOG
 
-2025-09-26 Florido Paganelli  <florido.paganelli@fysik.lu.se>
+2026-10-19 Hanna Palm  <ha2684pa-s@student.lu.se>
 
-	Reviewing content of project template
+	Implementing CSV file to ROOT file converter
+	* Header file CSV2ROOT.h
+	* Source code CSV2ROOT.cxx
 
-	* Added ChangeLog.txt with comments and examples
-
-2025-09-25 Florido Paganelli  <florido.paganelli@fysik.lu.se>
-
-	Reviewing content of project template
-
-	* Checking directory structure
-	* Added Workplan.md
 
