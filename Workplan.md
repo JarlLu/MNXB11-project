@@ -35,4 +35,4 @@ Responsible for task: Yoline
 Responsible for task: Jarl
 
 ## SLURM
-
+Jarl will attempt to run the project as a slurm job.  
