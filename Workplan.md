@@ -17,6 +17,8 @@ We met up and made an outline on Monday Oct 19:
 ## Writing report + prepare for presentation
 - Each person responsible for writing about their task
 
+## Extracting data from csv file and making root files with TTree 
+Responsible for task: Hanna
 
 ## Things we want to look at / analyze
 - One common script that reads csv files and saves data as ROOT files (Hanna is looking into that.)
