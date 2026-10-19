@@ -17,6 +17,12 @@ We met up and made an outline on Monday Oct 19:
 ## Writing report + prepare for presentation
 - Each person responsible for writing about their task
 
+## Report layout -- Overleaf 
+- Yoline will attempt to make the paper look coherent in overleaf
+
+## Presentation 
+- We will contact the course managers whether we need a presentation with slides 
+
 ## Extracting data from csv file and making root files with TTree 
 Responsible for task: Hanna
 
@@ -38,3 +44,4 @@ Responsible for task: Jarl
 
 ## SLURM
 Jarl will attempt to run the project as a slurm job.  
+
