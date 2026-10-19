@@ -3,13 +3,18 @@
 Team number: 2  
 Team members: Jarl Olsson (Release Manager), Yoline Ruiter, Hanna Palm  
 
-# Plan
-We met up and made an outline:
+# Time plan
+We met up and made an outline on Monday Oct 19:
 ![ALT text](images/plan.jpeg)
+
+- Attempt to have some plots by Monday Oct 26.
+- Write project report on Tuesday (Oct 27) and Wednesday (Oct 28)
+- Revise everything on Thursday (Oct 29) and hand in project
+- Friday Oct 30: Project presentation! 
 
 
 # Tasks
-## Writing report
+## Writing report + prepare for presentation
 - Each person responsible for writing about their task
 
 
@@ -30,3 +35,4 @@ Responsible for task: Yoline
 Responsible for task: Jarl
 
 ## SLURM
+
