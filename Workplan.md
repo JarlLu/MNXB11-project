@@ -7,7 +7,7 @@ Team members: Jarl Olsson (Release Manager), Yoline Ruiter, Hanna Palm
 We met up and made an outline on Monday Oct 19:
 ![ALT text](images/plan.jpeg)
 
-- Attempt to have some plots by Monday Oct 26.
+- Attempt to have some plots by Monday Oct 26 at 5 pm 
 - Write project report on Tuesday (Oct 27) and Wednesday (Oct 28)
 - Revise everything on Thursday (Oct 29) and hand in project
 - Friday Oct 30: Project presentation! 
@@ -17,6 +17,8 @@ We met up and made an outline on Monday Oct 19:
 ## Writing report + prepare for presentation
 - Each person responsible for writing about their task
 
+## Extracting data from csv file and making root files with TTree 
+Responsible for task: Hanna
 
 ## Things we want to look at / analyze
 - One common script that reads csv files and saves data as ROOT files (Hanna is looking into that.)
@@ -35,4 +37,4 @@ Responsible for task: Yoline
 Responsible for task: Jarl
 
 ## SLURM
-
+Jarl will attempt to run the project as a slurm job.  
