@@ -1,14 +1,20 @@
 # Workplan for MNXB11 project
 
 Team number: 2  
-Team members: Jarl Olsson, Yoline Ruiter, Hanna Palm  
+Team members: Jarl Olsson (Release Manager), Yoline Ruiter, Hanna Palm  
 
 # Plan
 We met up and made an outline:
 ![ALT text](images/plan.jpeg)
 
 
-## Tasks / things we want to look at
+# Tasks
+## Writing report
+- Each person responsible for writing about their task
+
+
+## Things we want to look at / analyze
+
 ### 1. Hottest weekend (Saturday + Sunday)
 Responsible for task: Hanna
 
@@ -22,3 +28,5 @@ Responsible for task: Yoline
 
 ### 4. Climate change (Uppsala)
 Responsible for task: Jarl
+
+## SLURM
