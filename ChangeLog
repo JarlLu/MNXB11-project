@@ -27,3 +27,7 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	* Source code DataPoint.cxx
 	* Changed in main.cxx to test new DataPoint class
 
+	Implemented parse_csv_file function
+	* Header file Csv2Tree.h
+	* Source code CSv2Ttree.cxx
+
