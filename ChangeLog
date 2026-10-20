@@ -17,8 +17,13 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 
 2026-10-19 Hanna Palm  <ha2684pa-s@student.lu.se>
 
-	Implementing CSV file to ROOT file converter
+	Starting to implement CSV file to ROOT file converter
 	* Header file CSV2ROOT.h
 	* Source code CSV2ROOT.cxx
 
+2026-10-20 Hanna Palm <ha2684pa-s@student.lu.se>
+	Implemented DataPoint class
+	* Header file DataPoint.h
+	* Source code DataPoint.cxx
+	* Changed in main.cxx to test new DataPoint class
 
