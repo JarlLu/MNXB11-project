@@ -3,8 +3,8 @@ CXXWARNINGS := -Wall -Wextra -Werror
 CXXOPT := -O3
 CXXSTD := -std=c++17
 INCLUDES := -I include
-CXXFLAGS := $(CXXWARNINGS) $(CXXSTD) $(CXXOPT) $(INCLUDES)
-LDFLAGS :=
+CXXFLAGS := $(CXXWARNINGS) $(CXXSTD) $(CXXOPT) $(INCLUDES) $(shell root-config --cflags)
+LDFLAGS := $(shell root-config --libs)
 
 .PHONY: all clean
 
@@ -16,7 +16,7 @@ all: main
 #
 # Remove the Example object file when you are done looking at it, it doesn't
 # contribute to the executable!
-main: main.cxx src/DataPoint.cxx src/Csv2Ttree.cxx
+main: main.cxx src/DataPoint.cxx src/Csv2TTree.cxx
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 src/%.o: src/%.cxx
