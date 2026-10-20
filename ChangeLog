@@ -30,4 +30,5 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	Implemented parse_csv_file function
 	* Header file Csv2Tree.h
 	* Source code CSv2Ttree.cxx
+	- It takes a csv file path and returns a vector of DataPoint objects
 
