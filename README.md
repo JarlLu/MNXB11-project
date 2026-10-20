@@ -84,3 +84,19 @@ make -j8 install # If you are on an 8-core machine
 Make sure to document how to do this for any library you choose to use!
 
 Have fun!
+
+# Examples
+
+## DataPoint class
+
+```cpp 
+#include "DataPoint.h"
+#include <iostream>
+
+using namespace project;
+int main() {
+    project::DataPoint datapoint = project::DataPoint("1880-01-01", 20, 20.3, true);
+    std::cout << "Date: " << datapoint.get_date() << "\n";
+    std::cout << "Temp: " << datapoint.get_temperature() << "\n";
+}
+```
