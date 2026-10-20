@@ -13,18 +13,27 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	* Fine grained description of important things that you want to communicate
 
 
-# Example (entries from newest to oldest):
+# CHANGELOG
 
-2025-09-26 Florido Paganelli  <florido.paganelli@fysik.lu.se>
+2026-10-19 Hanna Palm  <ha2684pa-s@student.lu.se>
 
-	Reviewing content of project template
+	Starting to implement CSV file to ROOT file converter
+	* Header file CSV2ROOT.h
+	* Source code CSV2ROOT.cxx
 
-	* Added ChangeLog.txt with comments and examples
+2026-10-20 Hanna Palm <ha2684pa-s@student.lu.se>
+	Implemented DataPoint class
+	* Header file DataPoint.h
+	* Source code DataPoint.cxx
+	* Changed in main.cxx to test new DataPoint class
 
-2025-09-25 Florido Paganelli  <florido.paganelli@fysik.lu.se>
+	Implemented parse_csv_file function
+	* Header file Csv2Tree.h
+	* Source code CSv2Ttree.cxx
+	- It takes a csv file path and returns a vector of DataPoint objects
 
-	Reviewing content of project template
-
-	* Checking directory structure
-	* Added Workplan.md
+	Implemented csv_to_root function
+	* Header file Csv2Tree.h
+	* Source code CSv2Ttree.cxx
+	- It takes a csv file path and saves entries into a TTree format, output file .root
 

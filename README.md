@@ -84,3 +84,48 @@ make -j8 install # If you are on an 8-core machine
 Make sure to document how to do this for any library you choose to use!
 
 Have fun!
+
+# Examples
+
+## DataPoint class
+
+```cpp 
+#include "DataPoint.h"
+#include <iostream>
+
+using namespace project;
+int main() {
+    project::DataPoint datapoint = project::DataPoint("1880-01-01", 20, 20.3, true);
+    std::cout << "Date: " << datapoint.get_date() << "\n";
+    std::cout << "Temp: " << datapoint.get_temperature() << "\n";
+}
+```
+
+## CSV to ROOT
+```cpp
+#include "DataPoint.h"
+#include "Csv2TTree.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <TFile.h>
+#include <TTree.h>
+
+using namespace project;
+  int main() {
+
+    project::csv_to_root("datasets/testdata2.csv", "datasets/rootfiles/testroot2.root" );
+    
+    TFile file("/home/hannap/mnxb11/MNXB11-project/datasets/rootfiles/testroot2.root", "READ");
+    file.ls();
+
+    TTree* tree = nullptr;
+    file.GetObject("temperature", tree);
+
+    if (tree) {
+        tree->Print();
+    }
+
+      return 0;
+    }
