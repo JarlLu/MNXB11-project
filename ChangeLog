@@ -32,3 +32,8 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	* Source code CSv2Ttree.cxx
 	- It takes a csv file path and returns a vector of DataPoint objects
 
+	Implemented csv_to_root function
+	* Header file Csv2Tree.h
+	* Source code CSv2Ttree.cxx
+	- It takes a csv file path and saves entries into a TTree format, output file .root
+
