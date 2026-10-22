@@ -24,6 +24,7 @@ namespace project {
         std::cerr << "Could not open the file! \n";
         };
 
+        std::cout << "The file has been opened!\n";
         std::string line;
         std::vector<DataPoint> datapoints;
 
@@ -68,6 +69,8 @@ namespace project {
             datapoints.push_back(datapoint);
             //std::cout << "Successfully added a new datapoint to the list! \n"; // sanity check      
         };
+
+        std::cout << "Successfully extracted the datapoints from the CSV file!\n";
     return datapoints;
     };
 
@@ -89,6 +92,7 @@ namespace project {
             return;
         }
 
+        std::cout << "Successfully created the ROOT file!\n";
         // create the Ttree
         TTree *tree = new TTree("data", "Temperature data");
 
@@ -105,6 +109,7 @@ namespace project {
         tree->Branch("temperature", &temperature);
         tree->Branch("quality", &quality);
 
+        std::cout << "Creating branches...\n";
         // iterate through datapoints
 
         for (project::DataPoint& dp : datapoints) {
@@ -112,9 +117,10 @@ namespace project {
             hour.push_back(dp.get_hour());
             temperature.push_back(dp.get_temperature());
             quality.push_back(dp.good_quality());
-            std::cout << "Saved another datapoint!\n";
+            //std::cout << "Saved another datapoint!\n";
             };
         tree->Fill();
+        std::cout << "Tree has been filled!\n";
 
         // cleaning up
         date.clear();
@@ -123,7 +129,7 @@ namespace project {
         quality.clear();
         
         tree->AutoSave();
-
+        std::cout << "The file has been saved!\n";
     };
 
     
