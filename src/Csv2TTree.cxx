@@ -32,7 +32,7 @@ namespace project {
         // Loop through all lines in csv file one by one
         while (std::getline(file, line)) {
             std::stringstream ss(line);  // "extracts" one line
-            std::cout << "The line: " << ss.str() << "\n";   // prints line (sanity check)
+            //std::cout << "The line: " << ss.str() << "\n";   // prints line (sanity check)
 
             // prep for next step
             std::string date;
@@ -56,17 +56,17 @@ namespace project {
             int hour = std::stoi(hour_str); // xonvert to int
 
             // print parameter values (sanity check)
-            std::cout << date << " "
-                    << hour << " "
-                    << temperature << " "
-                    << std::boolalpha << quality << "\n";
+            //std::cout << date << " "
+             //       << hour << " "
+              //      << temperature << " "
+              //      << std::boolalpha << quality << "\n";
             
 
             // creating instance of DataPoint
             DataPoint datapoint = DataPoint(date, hour, temperature, quality);      
 
             datapoints.push_back(datapoint);
-            std::cout << "Successfully added a new datapoint to the list! \n"; // sanity check      
+            //std::cout << "Successfully added a new datapoint to the list! \n"; // sanity check      
         };
     return datapoints;
     };
