@@ -24,6 +24,7 @@ namespace project {
         std::cerr << "Could not open the file! \n";
         };
 
+        std::cout << "The file has been opened!\n";
         std::string line;
         std::vector<DataPoint> datapoints;
 
@@ -32,7 +33,7 @@ namespace project {
         // Loop through all lines in csv file one by one
         while (std::getline(file, line)) {
             std::stringstream ss(line);  // "extracts" one line
-            std::cout << "The line: " << ss.str() << "\n";   // prints line (sanity check)
+            //std::cout << "The line: " << ss.str() << "\n";   // prints line (sanity check)
 
             // prep for next step
             std::string date;
@@ -56,18 +57,20 @@ namespace project {
             int hour = std::stoi(hour_str); // xonvert to int
 
             // print parameter values (sanity check)
-            std::cout << date << " "
-                    << hour << " "
-                    << temperature << " "
-                    << std::boolalpha << quality << "\n";
+            //std::cout << date << " "
+             //       << hour << " "
+              //      << temperature << " "
+              //      << std::boolalpha << quality << "\n";
             
 
             // creating instance of DataPoint
             DataPoint datapoint = DataPoint(date, hour, temperature, quality);      
 
             datapoints.push_back(datapoint);
-            std::cout << "Successfully added a new datapoint to the list! \n"; // sanity check      
+            //std::cout << "Successfully added a new datapoint to the list! \n"; // sanity check      
         };
+
+        std::cout << "Successfully extracted the datapoints from the CSV file!\n";
     return datapoints;
     };
 
@@ -89,6 +92,7 @@ namespace project {
             return;
         }
 
+        std::cout << "Successfully created the ROOT file!\n";
         // create the Ttree
         TTree *tree = new TTree("data", "Temperature data");
 
@@ -105,6 +109,7 @@ namespace project {
         tree->Branch("temperature", &temperature);
         tree->Branch("quality", &quality);
 
+        std::cout << "Creating branches...\n";
         // iterate through datapoints
 
         for (project::DataPoint& dp : datapoints) {
@@ -112,9 +117,10 @@ namespace project {
             hour.push_back(dp.get_hour());
             temperature.push_back(dp.get_temperature());
             quality.push_back(dp.good_quality());
-            std::cout << "Saved another datapoint!\n";
+            //std::cout << "Saved another datapoint!\n";
             };
         tree->Fill();
+        std::cout << "Tree has been filled!\n";
 
         // cleaning up
         date.clear();
@@ -123,7 +129,7 @@ namespace project {
         quality.clear();
         
         tree->AutoSave();
-
+        std::cout << "The file has been saved!\n";
     };
 
     
