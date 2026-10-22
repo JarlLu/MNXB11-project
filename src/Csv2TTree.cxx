@@ -118,12 +118,15 @@ namespace project {
 
         // prep parameters 
         std::vector<std::string> date;
-        std::vector<Int_t> hour;
+        std::vector<Int_t> hour, day, month, year;
         std::vector<Double_t> temperature;
         std::vector<Bool_t> quality;
 
         // create branches
         tree->Branch("date", &date);
+        tree->Branch("year", &year);
+        tree->Branch("month", &month);
+        tree->Branch("day", &day);
         tree->Branch("hour", &hour);
         tree->Branch("temperature", &temperature);
         tree->Branch("quality", &quality);
@@ -133,9 +136,13 @@ namespace project {
 
         for (project::DataPoint& dp : datapoints) {
             date.push_back(dp.get_date());
+            day.push_back(dp.get_day());
+            month.push_back(dp.get_month());
+            year.push_back(dp.get_year());
             hour.push_back(dp.get_hour());
             temperature.push_back(dp.get_temperature());
             quality.push_back(dp.good_quality());
+
             // std::cout << "Saved another datapoint!\n";
             };
         tree->Fill();
