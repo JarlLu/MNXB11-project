@@ -67,5 +67,9 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	* monthly_coldest.C this will be converted to a cxx and a header and included in main
 	- Note: the code is a mess and still under development 
 	- Note: the startmnxb11container does not load properly 
-	
+
+2026-10-22 Yoline Ruiter <yo0302ru-s@student.lu.nl> and Jarl 
+	Met at 15:15 to go over the project structure and establish a method of running all the code in order to be able to use slurm
+
+
 
