@@ -17,6 +17,7 @@ class DataPoint {
         /// @param quality If is data point valid
         DataPoint(std::string date, int hour, double temperature, bool quality);
         
+        DataPoint(std::string date, double temperature, int quality); //Custom constructor for uppsala dataset
         // should we add destructor?
         std::string get_date();    
         int get_hour();
