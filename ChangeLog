@@ -37,3 +37,8 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	* Source code CSv2Ttree.cxx
 	- It takes a csv file path and saves entries into a TTree format, output file .root
 
+2026-10-22 Hanna Palm <ha2684pa-s@student.lu.se>
+	Updated Csc2TTree.cxx to ignore metadata. 
+	* Looping over metadata lines in beginning of file and only saves data given after the header.
+
+
