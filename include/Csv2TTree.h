@@ -20,4 +20,4 @@ namespace project {
 
 // note: separated parse_csv_file and csv_to_root into two different functions in case
 // we want to clean up the data in-between at a later stage of code development
-#endif /*CSV_2_TTREE*/
+#endif /*CSV_2_TTREE_H*/
