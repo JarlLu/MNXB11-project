@@ -87,6 +87,24 @@ Have fun!
 
 # Examples
 
+
+## How to run
+
+1. In MNXB11-project directory
+
+2. To build project:
+```bash
+cd scripts/
+./buildproject.sh
+```
+
+3. To run project:
+```bash
+cd scripts/
+./runproject.sh
+```
+**Note:** `runproject.sh` runs the executable `main` so any code you want to run should be written in `main.cxx`. Also make sure that paths are correct!
+
 ## DataPoint class
 
 ```cpp 

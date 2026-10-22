@@ -13,9 +13,9 @@
 using namespace project;
   int main() {
 
-    project::csv_to_root("datasets/testdata2.csv", "datasets/rootfiles/testroot2.root" );
+    project::csv_to_root("datasets/testdata/testdata3.csv", "datasets/rootfiles/testroot3.root" );
     
-    TFile file("./datasets/rootfiles/testroot2.root", "READ");
+    TFile file("./datasets/rootfiles/testroot3.root", "READ");
     file.ls();
 
     TTree* tree = nullptr;
@@ -27,7 +27,13 @@ using namespace project;
 
 
     project::dat_to_root_TTree("./datasets/uppsala_tm_1722-2022.dat","./datasets/rootfiles/uppsala_1722-2022.root");
-    std::cout << "opened and closed succesfully \n";
+    std::cout << "\n*****************************\n";
+
+    DataPoint point = DataPoint("1902-02-29", 21, 21.1, true);
+
+    std::cout << "Year: " << point.get_year() << "\n";
+    std::cout << "Month: " << point.get_month() << "\n";
+    std::cout << "Day: " << point.get_day() << "\n";
       return 0;
 
     
