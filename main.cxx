@@ -2,6 +2,7 @@
 
 #include "DataPoint.h"
 #include "Csv2TTree.h"
+#include "Dat2TTree.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -14,7 +15,7 @@ using namespace project;
 
     project::csv_to_root("datasets/testdata2.csv", "datasets/rootfiles/testroot2.root" );
     
-    TFile file("/home/hannap/mnxb11/MNXB11-project/datasets/rootfiles/testroot2.root", "READ");
+    TFile file("./datasets/rootfiles/testroot2.root", "READ");
     file.ls();
 
     TTree* tree = nullptr;
@@ -24,5 +25,10 @@ using namespace project;
         tree->Print();
     }
 
+
+    project::dat_to_root_TTree("./datasets/uppsala_tm_1722-2022.dat","./datasets/rootfiles/uppsala_1722-2022.root");
+    std::cout << "opened and closed succesfully \n";
       return 0;
+
+    
     }
