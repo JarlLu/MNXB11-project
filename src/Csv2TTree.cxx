@@ -34,6 +34,8 @@ namespace project {
 
         // Loop through all lines in csv file one by one
         while (std::getline(file, line)) {
+            // line.find() returns 0 if line is found. But 0 = false for if statement
+            // hence added !(std::string::npos) which is what line.find() returns line not found
             if (line.find("Datum;Tid (UTC);Lufttemperatur;Kvalitet;;Tidsutsnitt:")
                 != std::string::npos) {
                 isData = true;
