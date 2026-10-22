@@ -11,19 +11,19 @@ DataPoint::DataPoint(std::string date, int hour, double temperature, bool qualit
 // TODO: implement an input parameter check to make sure parameters are valid
 
 
-std::string DataPoint::get_date() {
+std::string DataPoint::get_date() const {
     return _date;
 };
 
-int DataPoint::get_hour() {
+int DataPoint::get_hour() const {
     return _hour;
 };
 
-double DataPoint::get_temperature() {
+double DataPoint::get_temperature() const {
     return _temperature;
 };
 
-bool DataPoint::good_quality() {
+bool DataPoint::good_quality() const {
     return _quality;
 };
 
@@ -41,15 +41,15 @@ void DataPoint::_split_date() {
 
 };
 
-int DataPoint::get_day() {
+int DataPoint::get_day() const {
     return _day;
 };
 
-int DataPoint::get_month() {
+int DataPoint::get_month() const {
     return _month;
 };
 
-int DataPoint::get_year() {
+int DataPoint::get_year() const {
     return _year;
 };
 

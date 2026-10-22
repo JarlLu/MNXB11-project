@@ -66,7 +66,7 @@ namespace project {
                 std::getline(ss, quality_str, ';');
                 
                 std::stringstream timestream(time);
-                std::getline(timestream, hour_str,'-'); // extract only the hour from time string
+                std::getline(timestream, hour_str,':'); // extract only the hour from time string
 
                 // convert to correct formats
                 double temperature = std::stod(temperature_str); // convert to double
@@ -117,13 +117,13 @@ namespace project {
 
 
         // prep parameters 
-        std::vector<std::string> date;
-        std::vector<Int_t> hour, day, month, year;
-        std::vector<Double_t> temperature;
-        std::vector<Bool_t> quality;
+        Int_t year, month, day, hour;
+        Double_t temperature;
+        Bool_t quality;
+        //std::string date;
 
         // create branches
-        tree->Branch("date", &date);
+        //tree->Branch("date", &date);
         tree->Branch("year", &year);
         tree->Branch("month", &month);
         tree->Branch("day", &day);
@@ -134,27 +134,24 @@ namespace project {
         std::cout << "Creating branches...\n";
         // iterate through datapoints
 
-        for (project::DataPoint& dp : datapoints) {
-            date.push_back(dp.get_date());
-            day.push_back(dp.get_day());
-            month.push_back(dp.get_month());
-            year.push_back(dp.get_year());
-            hour.push_back(dp.get_hour());
-            temperature.push_back(dp.get_temperature());
-            quality.push_back(dp.good_quality());
+        for (const project::DataPoint& dp : datapoints) {
+            //date = dp.get_date();
+            year = dp.get_year();
+            month = dp.get_month();
+            day = dp.get_day();
+            hour = dp.get_hour();
+            temperature = dp.get_temperature();
+            quality = dp.good_quality();
 
-            // std::cout << "Saved another datapoint!\n";
+            // std::cout << "\n Year: " << year << " month: " << month << " day: "<< day << "\n";
+            tree->Fill();
+
+            //std::cout << "Saved another datapoint!\n";
             };
-        tree->Fill();
-        std::cout << "Tree has been filled!\n";
-
-        // cleaning up
-        date.clear();
-        hour.clear();
-        temperature.clear();
-        quality.clear();
-        
         tree->AutoSave();
+        // cleaning up
+
+        
         std::cout << "The file has been saved!\n";
     };
 

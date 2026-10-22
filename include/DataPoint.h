@@ -18,14 +18,14 @@ class DataPoint {
         /// @param quality If is data point valid
         DataPoint(std::string date, int hour, double temperature, bool quality);        
         // should we add destructor?
-        std::string get_date();    
-        int get_hour();
-        double get_temperature();
-        bool good_quality();
+        std::string get_date() const;    
+        int get_hour() const;
+        double get_temperature() const;
+        bool good_quality() const;
         
-        int get_day();
-        int get_month();
-        int get_year();
+        int get_day() const;
+        int get_month() const;
+        int get_year() const;
 
 
     private:
