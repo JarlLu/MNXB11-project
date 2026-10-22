@@ -40,8 +40,9 @@ Responsible for task: Hanna
 Responsible for task: Yoline
 
 ### 4. Climate change (Uppsala)
-Responsible for task: Jarl
+Responsible for task: Jarl  
 
+Will need separate data extraction code because of different file format. 
 ## SLURM
 Jarl will attempt to run the project as a slurm job.  
 

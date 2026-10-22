@@ -37,6 +37,21 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	* Source code CSv2Ttree.cxx
 	- It takes a csv file path and saves entries into a TTree format, output file .root
 
+2026-10-21 Jarl Olsson  <ja4886ol-s@student.lu.se>
+	Started creating the .dat file to TTree in .root file converter  
+	*Header file Dat2TTree.h  
+	*Source code Dat2TTree.cxx  
+
+2026-10-22 Jarl Olsson  <ja4886ol-s@student.lu.se>
+	Implemented custom constructor for uppsala dataset   
+	*Header file DataPoint.h  
+	*Source code Datapoint.cxx  
+	
+	Finished implementing the .dat file to TTree in .root file converter.
+	*saving date, temperature and placeholder quality in TTree
+	*updated main function to create .root file from uppsala dataset
+
+	
 2026-10-22 Hanna Palm <ha2684pa-s@student.lu.se>
 	Updated Csc2TTree.cxx to ignore metadata. 
 	* Looping over metadata lines in beginning of file and only saves data given after the header.

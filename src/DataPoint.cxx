@@ -8,6 +8,8 @@ DataPoint::DataPoint(std::string date, int hour, double temperature, bool qualit
         _split_date();
     } 
 
+DataPoint::DataPoint(std::string date, double temperature) : _date(date), _hour(-1), _temperature(temperature), _quality(true) {}
+
 // TODO: implement an input parameter check to make sure parameters are valid
 
 
