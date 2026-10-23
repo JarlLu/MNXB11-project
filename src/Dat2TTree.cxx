@@ -23,12 +23,14 @@ void project::dat_to_root_TTree(std::string datfile_path, std::string output_fil
     TTree *tree = new TTree("data","Temperature data");
     
     // initalize and set branch location of the data variables
-    std::string date;
-    Double_t temperature;
-    Bool_t quality;
-    tree->Branch("date", &date);
-    tree->Branch("temperature", &temperature);
-    tree->Branch("quality", &quality);
+    //std::string date;
+    //Double_t temperature;
+    //Bool_t quality;
+    //tree->Branch("date", &date);
+    //tree->Branch("temperature", &temperature);
+    //tree->Branch("quality", &quality);
+    DataPoint datapoint{"0000-00-00", 0, 0.0, false};
+    tree->Branch("datapoint",&datapoint);
 
 
     // loop through all entries
@@ -51,8 +53,8 @@ void project::dat_to_root_TTree(std::string datfile_path, std::string output_fil
         int year=std::stoi(year_str);
         int month=std::stoi(month_str);
         int day=std::stoi(day_str);
-        temperature=std::stod(corrected_temperature_str);
-        quality=std::stoi(quality_str);
+        double temperature=std::stod(corrected_temperature_str);
+        //int quality=std::stoi(quality_str);
 
 
         //create dates in the same format as the csv files have
@@ -61,7 +63,9 @@ void project::dat_to_root_TTree(std::string datfile_path, std::string output_fil
             << std::setfill('0') << std::setw(2) << month << '-'
             << std::setfill('0') << std::setw(2) << day;
 
-        date = date_stream.str();
+        std::string date = date_stream.str();
+
+        datapoint.set_values(date,-1,temperature,true);
         //put branches in tree
         tree->Fill();
 

@@ -62,3 +62,9 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	* Updated Csv2TTree.cxx to create branches for day, month and year and store that data.
 	- Note: seems to be writing root file properly but year parameter might be wrong. So check when we have root reader!
 
+2026-10-23 Jarl Olsson  <ja4886ol-s@student.lu.se>
+	Changed DataPoint class to inherit from TObject and made Dat2TTree store instances of DataPoint rather than individual branches.
+	*Created include/LinkDef.h and updated Makefile to create dictionary for DataPoint class
+	*Updated DataPoint class to have default constructor and setter
+	*Updated Dat2TTree.cxx to store instances of DataPoint rather than seperate branches for date, temperature and quality.
+
