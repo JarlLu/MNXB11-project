@@ -62,10 +62,27 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	* Updated Csv2TTree.cxx to create branches for day, month and year and store that data.
 	- Note: seems to be writing root file properly but year parameter might be wrong. So check when we have root reader!
 
+2026-10-22 Yoline Ruiter <yo0302ru-s@student.lu.se>
+	Created and updated monthly_coldest.C 
+	 * created and optimized the code to find minimum using arrays which creates 12 monthlytrees and monthlyfiles
+	 * checks if input is valid 
+	 * creates scatter plot to see correlation 
+	 - Note: File is .C and has to be converted to cxx 
+
 2026-10-23 Jarl Olsson  <ja4886ol-s@student.lu.se>
 	Changed DataPoint class to inherit from TObject and made Dat2TTree store instances of DataPoint rather than individual branches.
 	*Created include/LinkDef.h and updated Makefile to create dictionary for DataPoint class
 	*Updated DataPoint class to have default constructor and setter
 	*Updated Dat2TTree.cxx to store instances of DataPoint rather than seperate branches for date, temperature and quality.
 	*Updated Csv2TTree.cxx to also store instance of DataPoint.
+
+2026-10-23 Yoline Ruiter <yo0302ru-s@student.lu.se>
+	Changed .C to cxx and created a header file and main command 
+	* monthly_coldest.h defines void 
+	* main contains the command for initializing monthly_coldest.cxx
+	Started formatting and writing the paper in Overleaf and altered code so that the code is expected to be able to: 
+	* Read imput root file and retreives data tree
+	* Find the lowest good quality temperature for each month 
+	* Create 12 monthly root files 
+	* Createa scattes plot 
 
