@@ -79,4 +79,9 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	Changed .C to cxx and created a header file and main command 
 	* monthly_coldest.h defines void 
 	* main contains the command for initializing monthly_coldest.cxx
-	Started formatting and writing the paper in Overleaf 
+	Started formatting and writing the paper in Overleaf and altered code so that the code is expected to be able to: 
+	* Read imput root file and retreives data tree
+	* Find the lowest good quality temperature for each month 
+	* Create 12 monthly root files 
+	* Createa scattes plot 
+
