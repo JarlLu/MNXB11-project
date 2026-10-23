@@ -69,3 +69,6 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	*Updated Dat2TTree.cxx to store instances of DataPoint rather than seperate branches for date, temperature and quality.
 	*Updated Csv2TTree.cxx to also store instance of DataPoint.
 
+	Started on data analysis of climate change task.
+	*Created include/climate_change.h and src/climate_change.cxx and added basic structure to them.
+
