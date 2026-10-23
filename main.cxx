@@ -3,6 +3,7 @@
 #include "DataPoint.h"
 #include "Csv2TTree.h"
 #include "Dat2TTree.h"
+#include "monthly_coldest.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -36,5 +37,9 @@ using namespace project;
     std::cout << "Day: " << point.get_day() << "\n";
       return 0;
 
+    //Monthly_coldest
+    std::cout << "Starting monthly coldest analysis..." << std::endl;
+    monthly_coldest();
+      return 0;
     
     }
