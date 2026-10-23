@@ -7,15 +7,17 @@
 
 #include <string>
 #include <vector>
+#include <TObject.h>
 
 namespace project {
-class DataPoint {
+class DataPoint : public TObject {
     public:
         /// @brief Represents one data point
         /// @param date Day of measurement
         /// @param hour Hour of measurement 
         /// @param temperature Temperature
         /// @param quality If is data point valid
+        DataPoint();
         DataPoint(std::string date, int hour, double temperature, bool quality);
         
         DataPoint(std::string date, double temperature); //Custom constructor for uppsala dataset
@@ -28,6 +30,7 @@ class DataPoint {
         int get_day() const;
         int get_month() const;
         int get_year() const;
+        void set_values(std::string date, int hour, double temperature, bool quality);
 
 
     private:
@@ -41,6 +44,7 @@ class DataPoint {
 
         void _split_date(); // private setter for day, year and month, uses info from _date
         
+        ClassDef(DataPoint, 1);
         // TODO: make quality include yellow results as well
 
 };
