@@ -93,5 +93,6 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	*Added function for generating plot over the average temperature from 1722-2022
 	*Updated main.cxx to include call to climate_change function which so far just opens root data file and calls the average temperature plot function
 	*Updated Makefile to include src/climate_change.cxx
+	*Added moving averages to the analysis and to the average temperature plot
 
 
