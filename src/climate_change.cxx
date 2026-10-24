@@ -11,7 +11,7 @@ namespace project {
     void climate_change(std::string root_file_path) {
     TFile *root_file=TFile::Open(root_file_path.c_str(), "READ"); //open file
     
-    if (root_file!=nullptr || root_file->IsZombie()) { //Making sure file opened properly
+    if (root_file==nullptr || root_file->IsZombie()) { //Making sure file opened properly
         std::cerr << "Error opening root file \n";
         return;
     }
