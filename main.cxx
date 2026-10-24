@@ -4,6 +4,7 @@
 #include "Csv2TTree.h"
 #include "Dat2TTree.h"
 #include "monthly_coldest.h"
+#include "climate_change.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -28,6 +29,7 @@ using namespace project;
 
 
     project::dat_to_root_TTree("./datasets/uppsala_tm_1722-2022.dat","./datasets/rootfiles/uppsala_1722-2022.root");
+    project::climate_change("./datasets/rootfiles/uppsala_1722-2022.root");
     std::cout << "\n*****************************\n";
 
     DataPoint point = DataPoint("1902-02-29", 21, 21.1, true);
