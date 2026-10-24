@@ -20,7 +20,7 @@ using namespace project;
     file.ls();
 
     TTree* tree = nullptr;
-    file.GetObject("temperature", tree);
+    file.GetObject("data", tree);
 
     if (tree) {
         tree->Print();
@@ -35,11 +35,15 @@ using namespace project;
     std::cout << "Year: " << point.get_year() << "\n";
     std::cout << "Month: " << point.get_month() << "\n";
     std::cout << "Day: " << point.get_day() << "\n";
-      return 0;
+     // return 0;
 
     //Monthly_coldest
     std::cout << "Starting monthly coldest analysis..." << std::endl;
+
     monthly_coldest();
-      return 0;
+
+          std::cout << "Monthly coldest analysis has finished!" << std::endl;
+
+    return 0; 
     
     }

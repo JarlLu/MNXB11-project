@@ -1,4 +1,5 @@
 #include "monthly_coldest.h"
+#include "DataPoint.h"
 #include <TFile.h>
 #include <TTree.h>
 #include <TGraph.h>
@@ -15,12 +16,13 @@
 void monthly_coldest() {
 // -----------------------READ INPUT FILE AND RETREIVE DATA TREE --------------
     // Open root file and define input as pointer that stores memory adress, open the file in read only 
-    TFile *input = TFile::Open("datasets/rootfiles/testroot2.root", "READ");
+
+    TFile *input = TFile::Open("datasets/rootfiles/testroot3.root", "READ");
 
         //if cannot find root file or file is unusable show error message
         if (!input || input->IsZombie()) 
         {
-            std::cerr << "Cannot open input ROOT file!" << endl;
+            std::cerr << "Cannot open input ROOT file!" << std::endl;
             return;
         }
     
@@ -36,20 +38,15 @@ void monthly_coldest() {
             return;
         }
 
-        //create a pointer to vector of strings which will be defined later on 
-    std::vector<std::string> *date = nullptr;
-        //create a yet empty pointer to vector of a double 
-    std::vector<double> *temperature = nullptr;
-        //create a yet empty pointer to vector of bool which is either true or false 
-    std::vector<bool> *quality = nullptr;
-        //define the hour to be an integer 
-    Int_t hour;
-    
-    // Connect each variable to its corresponding branch in the tree while & gives the memory adress of each pointer
-    tree->SetBranchAddress("date", &date);
-    tree->SetBranchAddress("hour", &hour);
-    tree->SetBranchAddress("temperature", &temperature);
-    tree->SetBranchAddress("quality", &quality);
+    project::DataPoint* datapoint = nullptr;
+    project::DataPoint outPoint;
+
+    if (tree->SetBranchAddress("datapoint", &datapoint) < 0) {
+        std::cerr << "cannot read branch datapoint :( ! \n"; 
+        input -> Close();
+        return;
+    }
+
 
     // ------------- FIND THE LOWEST TEMPERATURE FOR ALL MONTHS, WITH GOOD QUALITY -------------------
 
@@ -79,11 +76,13 @@ for (Long64_t i = 0; i < tree->GetEntries(); ++i)
         tree->GetEntry(i);
 
             //check if date pointers is non zero or empty and checks if temp and quality are valid, skip if not 
-            if (!date || date->empty() || !temperature || !quality)
+            if (!datapoint)
                 continue;
-        
-        //date pointer is used to get first valid output and name it currentdata which is a non changed string 
-        const std::string& currentDate = date->at(0);
+
+        const std::string currentDate = datapoint->get_date();
+        const double temp = datapoint->get_temperature();
+        const bool good = datapoint->good_quality();
+
 
         // define three integers 
         int year;
@@ -95,57 +94,67 @@ for (Long64_t i = 0; i < tree->GetEntries(); ++i)
                 continue;
 
             //check if months are between 1 and 12, if not skip 
-            if (month < 1 || month > 12)
-                continue;
+            if (month < 1 || month > 12 || day < 1 || day > 31 || !good)
+               continue;
 
         // define an integer which stores the indexes of the months (jan = 0) simular to arrays 
         int index = month - 1;
 
-            //loop though all temp and quality vectors 
-            for (size_t j = 0; j < n; ++j)
-            {
-                //check if quality is good and temperature is lower than the current minimum 
-                if ((*quality)[j] && (*temperature)[j] < minTemp[index])
-                {
-                //them update the minimum temp position j of that month and note the day and date for this measuement 
-                minTemp[index] = (*temperature)[j];
-                coldestDay[index] = day;
-                coldestDate[index] = currentDate;
-                }
-            }
+          if (temp < minTemp[index]) {
+            minTemp[index] = temp;
+            coldestDay[index] = day;
+            coldestDate[index] = currentDate;
+        }
+
+    
     }
 
     // ----------------CREATE MONTHLY ROOT FILES --------------------
 
     // stores 12 pointers in files and trees
-    TFile *monthFiles[12];
-    TTree *monthTrees[12];
+    TFile *monthFiles[12] = {};
+    TTree *monthTrees[12] = {};
 
-   //we define the datapype of the outputs to store the outputs -- same as input but now out
-    std::vector<std::string> outDate;
-    std::vector<double> outTemperature;
-    std::vector<bool> outQuality;
-    Int_t outHour;
+   
 
     //CREATE THE 12 MONTHLY ROOT FILES 
     //we will create new files for each month with the output from the for loop and creates pointer and uses dynamic filenames 
     //RECREATE since want create a new file or override a file with the same name 
 for (int m = 0; m < 12; ++m) 
     {
-            monthFiles[m] = new TFile(
-            Form("datasets/monthrootfiles/month_%02d.root", m + 1), "RECREATE");
+            monthFiles[m] = TFile::Open(Form("datasets/monthrootfiles/month_%02d.root", m + 1), "RECREATE");
             //we will create new trees for each month with the output from the for loop
             //the tree stores both the month data and the temperature data, we need both tree and file since the tree is stored in the file  
-            monthTrees[m] = new TTree(
-            Form("month_%02d", m + 1),
-            Form("Temperature data for month %02d", m + 1));
+            
 
-            //we create branches again but now with the output data while creating pointers at the same time using the files we created above 
-            monthTrees[m]->Branch("date", &outDate);
-            monthTrees[m]->Branch("hour", &outHour);
-            monthTrees[m]->Branch("temperature", &outTemperature);
-            monthTrees[m]->Branch("quality", &outQuality);
+        if (!monthFiles[m] || monthFiles[m]->IsZombie()) 
+        {
+            std::cerr << "Cannot create monthly ROOT file "<< m + 1 << "!\n";
+    
+            for (int j = 0; j <= m; ++j) {
+                if (monthFiles[j]) 
+                {
+                    monthFiles[j]->Close();
+                    delete monthFiles[j];
+                }
+
+            } 
+            input->Close();
+            delete input;
+            return;
+
+        } 
+
+        monthFiles[m]->cd();
+
+        monthTrees[m] = new TTree(
+        Form("month_%02d", m + 1),
+        Form("Temperature data for month %02d", m + 1));
+
+        // Store the same DataPoint object format as the input.
+        monthTrees[m]->Branch("datapoint", &outPoint);
     }
+    
 
     //SORT THE DATA INTO THE 12 MONTHLY FILES 
     //for loop very simular to the previous for loop but now considering output 
@@ -153,33 +162,35 @@ for (Long64_t i = 0; i < tree->GetEntries(); ++i)
     {
         tree->GetEntry(i);
 
-        if (!date || date->empty() || !temperature || !quality)
+        if (!datapoint)
             continue;
 
-        const std::string& currentDate = date->at(0);
+        const std::string& currentDate = datapoint->get_date();
+     
+        // define three integers 
+        int year;
+        int month;
+        int day;
 
-        // dates are in YYYY-MM-DD which are 10 charackers, skips if not 10 charackters 
-        if (currentDate.size() < 10)
-            continue;
+            // get data from the date string defined earlier, separate them into 3, if not into 3, skip
+            if (sscanf(currentDate.c_str(), "%d-%d-%d", &year, &month, &day) != 3)
+                continue;
 
-        //finds the month from the date output to verify and find index 
-        int month = std::stoi(currentDate.substr(5, 2));
+            //check if months are between 1 and 12, if not skip 
+            if (month < 1 || month > 12)
+               continue;
 
-        if (month < 1 || month > 12)
-            continue;
+        outPoint.set_values(
+        datapoint->get_date(),
+        datapoint->get_hour(),
+        datapoint->get_temperature(),
+        datapoint->good_quality()
+        );
 
         int index = month - 1;
+        monthTrees[index]->Fill();
+    } 
 
-        // copies contents into output variables 
-        outDate = currentDate;
-        outHour = hour;
-        outTemperature = *temperature;
-        outQuality = *quality;
-
-    monthTrees[index]->Fill();
-    }
-
-    
 
     //WRITE THE ACTUAL MONTHLY FILES 
 for (int m = 0; m < 12; ++m) 
@@ -188,8 +199,7 @@ for (int m = 0; m < 12; ++m)
         monthFiles[m]->cd();
         // write data to that month 
         monthTrees[m]->Write();
-        //close the file 
-        monthFiles[m]->Close();
+
 
         //prints the current month 
         std::cout << "Month " << m + 1 << ":" << std::endl;
@@ -202,9 +212,10 @@ for (int m = 0; m < 12; ++m)
                     // if not found, give an error message 
                     {std::cout << "No good-quality measurements"<< std::endl;} 
 
-
-        // delete the memory since the file has already been saved -- prevents memory leaks
+        // close the file and delete the memory since the file has already been saved -- prevents memory leaks
+        monthFiles[m]->Close();
         delete monthFiles[m];
+        delete monthTrees[m];
         }
 
     // ---------------------------------CREATE A SCATTER PLOT : MONTHS VS COLDEST DAYS -----------------------------------------------------
@@ -252,5 +263,5 @@ for (int m = 0; m < 12; ++m)
     //closes the imput file after reading 
     input->Close();
 
-    std::cout << "Finished! Coldest-day scatter plot saved." << std::endl;
+    std::cout << "Finished! Coldest-day scatter plot saved in monthrootfiles" << std::endl;
 }
