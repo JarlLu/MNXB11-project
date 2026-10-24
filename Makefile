@@ -12,7 +12,7 @@ LDFLAGS := $(shell root-config --libs)
 
 all: main
 
-main: main.cxx src/DataPoint.cxx src/Csv2TTree.cxx src/Dat2TTree.cxx src/DataPointDict.cxx | DataPointDict_rdict.pcm
+main: main.cxx src/DataPoint.cxx src/Csv2TTree.cxx src/Dat2TTree.cxx src/monthly_coldest.cxx src/DataPointDict.cxx | DataPointDict_rdict.pcm
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 src/DataPointDict.cxx: include/DataPoint.h include/LinkDef.h

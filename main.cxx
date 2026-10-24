@@ -35,9 +35,9 @@ using namespace project;
     std::cout << "Year: " << point.get_year() << "\n";
     std::cout << "Month: " << point.get_month() << "\n";
     std::cout << "Day: " << point.get_day() << "\n";
-     // return 0;
 
     //Monthly_coldest
+    project::csv_to_root("datasets/testdata/testdata_LUND1954.csv", "datasets/rootfiles/testdata_LUND1954.root");
     std::cout << "Starting monthly coldest analysis..." << std::endl;
 
     monthly_coldest();

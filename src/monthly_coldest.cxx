@@ -17,7 +17,7 @@ void monthly_coldest() {
 // -----------------------READ INPUT FILE AND RETREIVE DATA TREE --------------
     // Open root file and define input as pointer that stores memory adress, open the file in read only 
 
-    TFile *input = TFile::Open("datasets/rootfiles/testroot3.root", "READ");
+    TFile *input = TFile::Open( "/home/yruiter/MNXB11-project/datasets/rootfiles/testdata_LUND1954.root", "READ");
 
         //if cannot find root file or file is unusable show error message
         if (!input || input->IsZombie()) 
