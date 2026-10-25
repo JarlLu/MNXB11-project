@@ -12,6 +12,9 @@
 #include <string>
 #include <vector>
 #include <limits>
+#include <map>
+#include <utility> 
+#include <TLegend.h>
 
 
 namespace project {
@@ -56,7 +59,7 @@ void monthly_coldest(std::string root_file_path) {
     tree->Print();
 
     // ------------- FIND THE LOWEST TEMPERATURE FOR ALL MONTHS, WITH GOOD QUALITY -------------------
-
+/*
     // Create an array which stores 12 values of temperature in celcuis, one value for every month (0 -11), we use dataType arrayName[arraySize];
     double minTemp[12];
     //we then take that temperature and find the corresponding day, int coldestDay[0]; 3 will be stored (jan 3rd)
@@ -115,6 +118,50 @@ for (Long64_t i = 0; i < tree->GetEntries(); ++i)
 
     
     }
+        */
+
+    
+    // Store the coldest measurement for each year/month combination.
+    // Key: {year, month}; month ranges from 1 to 12.
+    struct ColdestInfo {
+        double temperature = std::numeric_limits<double>::infinity();
+        int day = -1;
+        std::string date;
+    };
+
+    std::map<std::pair<int, int>, ColdestInfo> coldest;
+
+    // Find the coldest good-quality measurement for every year and month.
+    for (Long64_t i = 0; i < tree->GetEntries(); ++i) {
+        tree->GetEntry(i);
+
+        if (!datapoint)
+            continue;
+
+        const std::string currentDate = datapoint->get_date();
+        const double temp = datapoint->get_temperature();
+        const bool good = datapoint->good_quality();
+
+        int year, month, day;
+
+        if (sscanf(currentDate.c_str(), "%d-%d-%d",
+                   &year, &month, &day) != 3)
+            continue;
+
+        if (month < 1 || month > 12 ||
+            day < 1 || day > 31 || !good)
+            continue;
+
+        // Create or retrieve the entry for this year and month.
+        auto& result = coldest[{year, month}];
+
+        if (temp < result.temperature) {
+            result.temperature = temp;
+            result.day = day;
+            result.date = currentDate;
+        }
+    }
+
 
     // ----------------CREATE MONTHLY ROOT FILES --------------------
 
@@ -218,6 +265,7 @@ for (int m = 0; m < 12; ++m)
         monthTrees[m]->Write();
             */
 
+            /*
         //prints the current month 
         std::cout << "Month " << m + 1 << ":" << std::endl;
 
@@ -228,6 +276,27 @@ for (int m = 0; m < 12; ++m)
             else 
                     // if not found, give an error message 
                     {std::cout << "No good-quality measurements"<< std::endl;} 
+
+        */
+
+        // Print the coldest result for each year in this month.
+for (const auto& entry : coldest) {
+    const int year = entry.first.first;
+    int month = entry.first.second;
+    const ColdestInfo& result = entry.second;
+
+    if (month == m + 1) {
+        std::cout << year << " - Month " << month << ": ";
+
+        if (result.day >= 0) {
+            std::cout << result.date
+                      << ", temperature = "
+                      << result.temperature << " C\n";
+        } else {
+            std::cout << "No good-quality measurements\n";
+        }
+    }
+}
 
         // close the file and delete the memory since the file has already been saved -- prevents memory leaks
         std::cout << "DEBUG: about to close month " << m + 1 << std::endl;
@@ -242,10 +311,12 @@ for (int m = 0; m < 12; ++m)
 
     // ---------------------------------CREATE A SCATTER PLOT : MONTHS VS COLDEST DAYS -----------------------------------------------------
     
+    /*
    //create an empty graph 
     TGraph *graph = new TGraph();
 
     //ADD THE COLDEST DAYS TO THE SCATTER PLOTS  
+    /*
 for (int m = 0; m < 12; ++m) 
     {
         // days start from 1 
@@ -255,12 +326,32 @@ for (int m = 0; m < 12; ++m)
             graph->SetPoint(m, m + 1, coldestDay[m]);
         }
     }
+        */
 
+
+    // Add one point for every year/month combination.
+    int pointIndex = 0;
+
+    for (const auto& entry : coldest) {
+        const int month = entry.first.second;
+        const ColdestInfo& result = entry.second;
+
+        if (result.day >= 0) {
+            graph->SetPoint(pointIndex++, month, result.day);
+        }
+    }
+
+/*
     // create window where graph will be displayed 
     TCanvas *canvas = new TCanvas("canvas", "Coldest date of each month", 900, 600);
 
     //GRAPH DESIGN 
-    graph->SetTitle("Coldest Date in Each Month;Month;Day of month");
+    //graph->SetTitle("Coldest Date in Each Month;Month;Day of month");
+    graph->SetTitle(
+    "Coldest Date of Each Month Across Years;"
+    "Month;"
+    "Day of Month"
+);
     //filled circle 
     graph->SetMarkerStyle(20);
     //little bit bigger than regular 
@@ -274,9 +365,90 @@ for (int m = 0; m < 12; ++m)
     //draws axes and points and draws smooth curve through them 
     graph->Draw("ACP");
 
+
     //ENDING CODE 
     //saves canvas 
     canvas->SaveAs("datasets/monthrootfiles/monthly_coldest.png");
+      */
+
+    
+TCanvas* canvas = new TCanvas("canvas", "Coldest Day by Month", 1000, 600);
+
+std::map<int, TGraph*> yearGraphs;
+
+int colors[] = {
+    kBlue, kRed, kGreen + 2, kMagenta,
+    kOrange + 7, kCyan + 2, kViolet, kBlack
+};
+
+int colorIndex = 0;
+
+// Create one graph for each year
+for (const auto& entry : coldest) {
+    const int year = entry.first.first;
+
+    if (yearGraphs.find(year) == yearGraphs.end()) {
+        TGraph* graph = new TGraph();
+        graph->SetName(("year_" + std::to_string(year)).c_str());
+        graph->SetTitle(
+            "Coldest Day of Each Month;Month;Day of Month"
+        );
+        graph->SetMarkerStyle(20);
+        graph->SetMarkerSize(1.4);
+        graph->SetMarkerColor(colors[colorIndex % 8]);
+        graph->SetLineColor(colors[colorIndex % 8]);
+
+        yearGraphs[year] = graph;
+        ++colorIndex;
+    }
+}
+
+// Fill each year's graph
+std::map<int, int> pointCounts;
+
+for (const auto& entry : coldest) {
+    const int year = entry.first.first;
+    const int month = entry.first.second;
+    const ColdestInfo& result = entry.second;
+
+    if (result.day >= 0) {
+        yearGraphs[year]->SetPoint(
+            pointCounts[year]++, month, result.day
+        );
+    }
+}
+
+// Draw all years on the same plot
+bool first = true;
+TLegend* legend = new TLegend(0.80, 0.70, 0.95, 0.90);
+
+for (const auto& entry : yearGraphs) {
+    const int year = entry.first;
+    TGraph* graph = entry.second;
+
+    if (first) {
+        graph->SetTitle(
+            "Coldest Day of Each Month;Month;Day of Month"
+        );
+        graph->GetXaxis()->SetLimits(0.5, 12.5);
+        graph->GetXaxis()->SetNdivisions(12);
+        graph->GetYaxis()->SetRangeUser(0, 32);
+        graph->Draw("ACP");
+        first = false;
+    } else {
+        graph->Draw("P SAME");
+    }
+
+    legend->AddEntry(
+        graph, std::to_string(year).c_str(), "p"
+    );
+}
+
+legend->Draw();
+
+canvas->SaveAs("datasets/monthrootfiles/monthly_coldest.png");
+
+
 
     //release the memory 
     delete canvas;
