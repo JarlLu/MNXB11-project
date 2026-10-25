@@ -13,28 +13,32 @@
 #include <vector>
 #include <limits>
 
-void monthly_coldest() {
+
+namespace project {
+void monthly_coldest(std::string root_file_path) {
 // -----------------------READ INPUT FILE AND RETREIVE DATA TREE --------------
     // Open root file and define input as pointer that stores memory adress, open the file in read only 
 
-    TFile *input = TFile::Open( "/home/yruiter/MNXB11-project/datasets/rootfiles/testdata_LUND1954.root", "READ");
+
+    TFile *root_file=TFile::Open(root_file_path.c_str(), "READ");
 
         //if cannot find root file or file is unusable show error message
-        if (!input || input->IsZombie()) 
+        if (!root_file || root_file->IsZombie()) 
         {
             std::cerr << "Cannot open input ROOT file!" << std::endl;
             return;
         }
     
     //create a pointer and find the tree and link pointer to tree, data is the tree in the root file
+    
     TTree *tree = nullptr;
-    input->GetObject("data", tree);
+    root_file->GetObject("data", tree);
 
         //if it cannot find tree, show the error message and close the input file
         if (!tree) 
         {
             std::cerr << "Cannot find tree named data!\n";
-            input->Close();
+            root_file->Close();
             return;
         }
 
@@ -43,10 +47,13 @@ void monthly_coldest() {
 
     if (tree->SetBranchAddress("datapoint", &datapoint) < 0) {
         std::cerr << "cannot read branch datapoint :( ! \n"; 
-        input -> Close();
+        root_file -> Close();
         return;
     }
 
+    std::cout << "Input file: " << root_file_path << '\n';
+    std::cout << "Tree entries: " << tree->GetEntries() << '\n';
+    tree->Print();
 
     // ------------- FIND THE LOWEST TEMPERATURE FOR ALL MONTHS, WITH GOOD QUALITY -------------------
 
@@ -139,8 +146,8 @@ for (int m = 0; m < 12; ++m)
                 }
 
             } 
-            input->Close();
-            delete input;
+            root_file->Close();
+            delete root_file;
             return;
 
         } 
@@ -195,11 +202,21 @@ for (Long64_t i = 0; i < tree->GetEntries(); ++i)
     //WRITE THE ACTUAL MONTHLY FILES 
 for (int m = 0; m < 12; ++m) 
         {
+            std::cout << "DEBUG A: entering month " << m + 1 << std::endl;
+
+            monthFiles[m]->cd();
+            std::cout << "DEBUG B: changed directory" << std::endl;
+
+            monthTrees[m]->Write();
+             std::cout << "DEBUG C: tree written" << std::endl;
+
+            std::cout << "Month " << m + 1 << ":" << std::endl;
+            /*
         // take current month as month where object is written
         monthFiles[m]->cd();
         // write data to that month 
         monthTrees[m]->Write();
-
+            */
 
         //prints the current month 
         std::cout << "Month " << m + 1 << ":" << std::endl;
@@ -213,9 +230,14 @@ for (int m = 0; m < 12; ++m)
                     {std::cout << "No good-quality measurements"<< std::endl;} 
 
         // close the file and delete the memory since the file has already been saved -- prevents memory leaks
+        std::cout << "DEBUG: about to close month " << m + 1 << std::endl;
         monthFiles[m]->Close();
-        delete monthFiles[m];
-        delete monthTrees[m];
+        std::cout << "DEBUG: closed month " << m + 1 << std::endl;
+        //delete monthFiles[m];
+
+        monthFiles[m] = nullptr;
+        monthTrees[m] = nullptr;
+        std::cout << "DEBUG: cleanup finished for month " << m + 1 << std::endl;
         }
 
     // ---------------------------------CREATE A SCATTER PLOT : MONTHS VS COLDEST DAYS -----------------------------------------------------
@@ -261,7 +283,8 @@ for (int m = 0; m < 12; ++m)
     delete graph;
 
     //closes the imput file after reading 
-    input->Close();
+    root_file->Close();
 
     std::cout << "Finished! Coldest-day scatter plot saved in monthrootfiles" << std::endl;
+}
 }
