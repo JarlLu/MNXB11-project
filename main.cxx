@@ -28,10 +28,10 @@ using namespace project;
     }
 
     std::cout << "\n*****************************\n";
-    std::cout << "Climate change analysis starting\n"
+    std::cout << "Climate change analysis starting\n";
     project::dat_to_root_TTree("./datasets/uppsala_tm_1722-2022.dat","./datasets/rootfiles/uppsala_1722-2022.root");
     project::climate_change("./datasets/rootfiles/uppsala_1722-2022.root");
-    std::cout << "Climate change analysis finished\n"
+    std::cout << "Climate change analysis finished\n";
     std::cout << "\n*****************************\n";
 
     DataPoint point = DataPoint("1902-02-29", 21, 21.1, true);
@@ -41,12 +41,12 @@ using namespace project;
     std::cout << "Day: " << point.get_day() << "\n";
 
     //Monthly_coldest
-    project::csv_to_root("datasets/testdata/testdata_LUND1954.csv", "datasets/rootfiles/testdata_LUND1954.root");
-    std::cout << "Starting monthly coldest analysis..." << std::endl;
-
-    monthly_coldest();
-
-          std::cout << "Monthly coldest analysis has finished!" << std::endl;
+    std::cout << "\n*****************************\n";
+    std::cout << "Starting monthly coldest analysis..."<< std::endl;
+    project::csv_to_root("./datasets/testdata/testdata_LUND1954.csv", "./datasets/rootfiles/testdata_LUND1954.root");
+    project::monthly_coldest("./datasets/rootfiles/testdata_LUND1954.root");
+    std::cout << "Monthly coldest analysis has finished!" << std::endl;
+    std::cout << "\n*****************************\n";
 
     return 0; 
     

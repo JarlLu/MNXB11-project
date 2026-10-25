@@ -159,10 +159,11 @@ namespace project {
 
             //std::cout << "Saved another datapoint!\n";
             };
-        tree->AutoSave();
+        //tree->AutoSave();
         // cleaning up
-
-        
+        tree->Write();
+        std::cout << "Tree entries written: " << tree->GetEntries() << '\n';
+        output.Close();
         std::cout << "The file has been saved!\n";
     };
 
