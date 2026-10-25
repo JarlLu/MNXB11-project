@@ -43,8 +43,8 @@ using namespace project;
     //Monthly_coldest
     std::cout << "\n*****************************\n";
     std::cout << "Starting monthly coldest analysis..."<< std::endl;
-    project::csv_to_root("./datasets/testdata/testdata_LUND1954.csv", "./datasets/rootfiles/testdata_LUND1954.root");
-    project::monthly_coldest("./datasets/rootfiles/testdata_LUND1954.root");
+    project::csv_to_root("./datasets/testdata/testdata_LUND1954-1956.csv", "./datasets/rootfiles/testdata_LUND1954-1956.root");
+    project::monthly_coldest("./datasets/rootfiles/testdata_LUND1954-1956.root");
     std::cout << "Monthly coldest analysis has finished!" << std::endl;
     std::cout << "\n*****************************\n";
 
