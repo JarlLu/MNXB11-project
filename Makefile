@@ -3,7 +3,7 @@ CXX := g++
 CXXWARNINGS := -Wall -Wextra -Werror
 CXXOPT := -O3
 CXXSTD := -std=c++17
-INCLUDES := -I include
+INCLUDES := -I include -I $(HOME)/external/include 
 ROOTINCLUDES := $(shell root-config --incdir)
 CXXFLAGS := $(CXXWARNINGS) $(CXXSTD) $(CXXOPT) $(INCLUDES) $(shell root-config --cflags)
 LDFLAGS := $(shell root-config --libs)
