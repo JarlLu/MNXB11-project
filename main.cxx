@@ -11,7 +11,7 @@
 #include "Csv2TTree.h"
 #include "Dat2TTree.h"
 #include "DataPoint.h"
-#include "HottestDay.h"
+#include "Weekday.h"
 #include "allcities.h"
 #include "climate_change.h"
 #include "monthly_coldest.h"
