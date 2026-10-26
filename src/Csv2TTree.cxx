@@ -116,42 +116,28 @@ namespace project {
         TTree *tree = new TTree("data", "Temperature data");
 
 
-        // prep parameters 
-        Int_t year, month, day, hour;
-        Double_t temperature;
-        Bool_t quality;
-        //std::string date;
+        //Initialize empty datapoint
+        DataPoint datapoint("0000-00-00",-1,0.0,false);
+        //Set branch location
+        tree->Branch("datapoint", &datapoint);
 
-        // create branches
-        //tree->Branch("date", &date);
-        tree->Branch("year", &year);
-        tree->Branch("month", &month);
-        tree->Branch("day", &day);
-        tree->Branch("hour", &hour);
-        tree->Branch("temperature", &temperature);
-        tree->Branch("quality", &quality);
 
         std::cout << "Creating branches...\n";
         // iterate through datapoints
 
         for (const project::DataPoint& dp : datapoints) {
-            //date = dp.get_date();
-            year = dp.get_year();
-            month = dp.get_month();
-            day = dp.get_day();
-            hour = dp.get_hour();
-            temperature = dp.get_temperature();
-            quality = dp.good_quality();
 
             // std::cout << "\n Year: " << year << " month: " << month << " day: "<< day << "\n";
+
+            //Using datapoint
+            datapoint.set_values(dp.get_date(),dp.get_hour(),dp.get_temperature(),dp.good_quality());
             tree->Fill();
 
-            //std::cout << "Saved another datapoint!\n";
             };
-        tree->AutoSave();
-        // cleaning up
 
-        
+        tree->Write();
+        std::cout << "Tree entries written: " << tree->GetEntries() << '\n';
+        output.Close();
         std::cout << "The file has been saved!\n";
     };
 
