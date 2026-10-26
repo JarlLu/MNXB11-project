@@ -135,5 +135,6 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	Updated Makefile and buildproject.sh
 	*Changed so that main target gets .o files instead of just the .cxx files also changed the order so that the root dictionary gets created first.
 	*Changed make command in buildproject.sh to always recompile with -B flag.
+	Removed date.h from our git repository and instead set it up as an external library
 
 
