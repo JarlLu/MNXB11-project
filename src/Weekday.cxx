@@ -126,8 +126,8 @@ void plot_average_temp_by_weekday(std::string csv_file_path,
 
     info->Draw();
 
-    std::string output_file_path = "images/hannas_plots/" + output_file_name +
-                                   "_" + std::to_string(year) + ".png";
+    std::string output_file_path =
+        "images/" + output_file_name + "_" + std::to_string(year) + ".png";
     canvas->Update();
     canvas->SaveAs(output_file_path.c_str());
 
@@ -239,8 +239,7 @@ void plot_av_temp_weekday_comparison(std::string csv_file_path,
     legend->Draw();
     canvas->Modified();
     canvas->Update();
-    std::string output_file_path =
-        "images/hannas_plots/" + output_file_name + ".png";
+    std::string output_file_path = "images/" + output_file_name + ".png";
     canvas->SaveAs(output_file_path.c_str());
 
     delete legend;
