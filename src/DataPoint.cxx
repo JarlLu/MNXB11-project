@@ -1,7 +1,7 @@
 #include "DataPoint.h"
 #include <sstream>
-#include <chrono>
-
+// could not use chrono due to using c++17 and chrono was added in c++20 (I think?)
+#include "date.h"
 ClassImp(project::DataPoint);
 namespace project {
 
@@ -72,18 +72,19 @@ int DataPoint::get_year() const {
 
 void DataPoint::_set_day_of_week() {
 
-    std::chrono::year_moth_day date{
-        std::chrono::year{_year},
-        std::chrono::month{static_cast<unsigned>(_month)}, // std::chrono expects unsigned int values, hence static_cast
-        std::chrono::day{static_cast<unsigned>(_day)}
+    date::year_month_day date{
+        date::year{_year},
+        date::month{static_cast<unsigned>(_month)}, // std::chrono expects unsigned int values, hence static_cast
+        date::day{static_cast<unsigned>(_day)}
     };
 
     // set value -1 if date not valid
     if (!date.ok()) { 
-        _day_of_week = -1
-    };
+        _day_of_week = -1;
+        return;
+    }
 
-    std::chrono::weekday wd{std::chrono::sys_days{date}};
+    date::weekday wd{date::sys_days{date}};
     _day_of_week = wd.iso_encoding();
 }
 
