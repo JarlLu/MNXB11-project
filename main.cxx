@@ -11,10 +11,11 @@
 #include <string>
 #include <TFile.h>
 #include <TTree.h>
+#include "HottestDay.h"
 
 using namespace project;
   int main() {
-
+    /*
     project::csv_to_root("datasets/smhi-opendata_1_52230_20261007_165001_Falsterbo.csv", "datasets/rootfiles/testrootFalsterbo.root" );
     
     TFile file("./datasets/rootfiles/testroot3.root", "READ");
@@ -47,6 +48,15 @@ using namespace project;
     project::monthly_coldest("./datasets/rootfiles/LUND2015-2025.root");
     std::cout << "Monthly coldest analysis has finished!" << std::endl;
     std::cout << "\n*****************************\n";
+ */
+    // project::csv_to_root("datasets/smhi-opendata_1_52230_20261007_165001_Falsterbo.csv", "datasets/rootfiles/testrootFalsterbo2.root" );
+    DataPoint point = DataPoint("1884-01-07", 21, 21.1, true);
+    std::cout << "day of week:  " << point.get_day_of_week() <<"\n";
+
+    project::plot_average_temp_by_weekday("datasets/smhi-opendata_1_53430_20261007_164857_Lund.csv",
+                                          "mean_temp_day_of_week", 2000);
+    project::plot_average_temp_by_weekday("datasets/smhi-opendata_1_53430_20261007_164857_Lund.csv", 
+                                          "mean_temp_day_of_week", 1980);
 
     return 0; 
     
