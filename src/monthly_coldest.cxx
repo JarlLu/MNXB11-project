@@ -18,6 +18,8 @@
 #include <limits>
 #include <map>
 #include <utility> 
+#include <cmath> 
+#include <TLatex.h>
 
 
 
@@ -290,7 +292,7 @@ for (const auto& entry : coldest) {
  // Calculate the average coldest day for each month across years.
 TGraph* averageGraph = new TGraph();
 
-averageGraph->SetName("monthly_average");
+averageGraph->SetName("aver.");
 averageGraph->SetTitle("Average coldest day");
 
 double daySums[12] = {};
@@ -305,6 +307,46 @@ for (const auto& entry : coldest) {
         monthCounts[month - 1]++;
     }
 }
+
+// Calculate the mean and standard deviation of the 12 monthly averages.
+double sumAverages = 0.0;
+int numberOfMonths = 0;
+double meanOfAverages = 0.0;
+double standardDeviation = 0.0;
+
+for (int m = 0; m < 12; ++m) {
+    if (monthCounts[m] > 0) {
+        sumAverages += daySums[m] / monthCounts[m];
+        numberOfMonths++;
+    }
+}
+
+if (numberOfMonths > 0) {
+    meanOfAverages = sumAverages / numberOfMonths;
+
+    double squaredDifferences = 0.0;
+
+    for (int m = 0; m < 12; ++m) {
+        if (monthCounts[m] > 0) {
+            double averageDay =
+                daySums[m] / monthCounts[m];
+
+            squaredDifferences +=
+                (averageDay - meanOfAverages) *
+                (averageDay - meanOfAverages);
+        }
+    }
+
+    standardDeviation =
+        std::sqrt(squaredDifferences / numberOfMonths);
+
+    std::cout << "Mean of monthly averages: "
+              << meanOfAverages << " days\n";
+
+    std::cout << "Standard deviation of monthly averages: "
+              << standardDeviation << " days\n";
+}
+
 
 int averagePoint = 0;
 
@@ -346,14 +388,28 @@ averageGraph->SetLineWidth(3);
  // Draw the axes first, with fixed limits.
 canvas->cd();
 
+std::string city = "UNKNOWN";
+
+if (root_file_path.find("LUND") != std::string::npos)
+    city = "LUND";
+else if (root_file_path.find("UPPSALA") != std::string::npos)
+    city = "UPPSALA";
+else if (root_file_path.find("KARLSTAD") != std::string::npos)
+    city = "KARLSTAD";
+else if (root_file_path.find("HALMSTAD") != std::string::npos)
+    city = "HALMSTAD";
+
+
 TH1F* frame = canvas->DrawFrame(
     0.5, 0, 12.5, 32,
-    "Coldest Day of Each Month;Month;Day of Month"
+    Form("Coldest Day of Each Month in %s (2020-2025);Month;Day of Month",
+         city.c_str())
 );
 frame->GetXaxis()->SetNdivisions(12);
 
 // Create the legend.
-TLegend* legend = new TLegend(0.75, 0.65, 0.94, 0.90);
+TLegend* legend = new TLegend(0.90, 0.10, 0.99, 0.30);
+legend->SetTextSize(0.025);
 
 // Draw each year's points and connecting lines.
 for (const auto& entry : yearGraphs) {
@@ -372,14 +428,37 @@ std::cout << "Average graph points: "
           << averageGraph->GetN() << std::endl;
 
 averageGraph->Draw("LP SAME");
-legend->AddEntry(averageGraph, "Monthly average", "lp");
+legend->AddEntry(averageGraph, "Average", "lp");
+
+// Display the mean and standard deviation separately from the legend.
+TLatex text;
+text.SetNDC();          // Use normalized canvas coordinates.
+text.SetTextSize(0.030);
+text.SetTextColor(kBlack);
+
+text.DrawLatex(
+    0.84, 0.96,
+    Form("Mean = %.2f days", meanOfAverages)
+);
+
+text.DrawLatex(
+    0.84, 0.93,
+    Form("Std. dev. = %.2f days", standardDeviation)
+);
 
 legend->Draw();
 
 canvas->Modified();
 canvas->Update();
-canvas->SaveAs("datasets/monthrootfiles/monthly_coldest.png");
+//canvas->SaveAs("datasets/monthrootfiles/monthly_coldest.png");
 
+
+std::string image_path =
+    "datasets/monthrootfiles/monthly_coldest_" + city + ".png";
+
+canvas->SaveAs(image_path.c_str());
+
+std::cout << "Saved image: " << image_path << std::endl;
 delete legend;
 
 
