@@ -5,9 +5,10 @@
 # job. In this case I am reusing the runproject.sh
 # script inside ../scripts
 
-#SBATCH -J "MNXB11 Project Team X"
+#SBATCH -J "MNXB11 Project Team 2"
 #SBATCH --time=00:01:00
 #SBATCH -A hep2023-1-6
-#SBATCH --mem 1M
+#SBATCH --mem 400M 
 
+unset XAUTHORITY
 ../scripts/runproject.sh

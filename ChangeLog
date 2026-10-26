@@ -109,4 +109,13 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	* succeeded to have the month...cxx file to produce a plot featuring multiple years 
 	NOTE: the code can handle as many years as liked but it becomes unreadable at 10 since the legend is in the way
 	* mananged to have an average of the days of all years 
-	
+
+2026-10-25 Jarl Olsson  <ja4886ol-s@student.lu.se>
+	Continued developement of climate change data analysis
+	*Added deviation from mean effect with red and blue points in plot if they are above/below the mean of all annual average temperatures (note:Unweighted mean where each year contributes equally to total mean)
+	*Cosmetic changes to plot with different line colors and a black line showing total mean.
+
+2026-10-26 Jarl Olsson  <ja4886ol-s@student.lu.se>
+	Updated slurm script
+	*Increased memory allocation to 400M 
+	*added unset XAUTHORITY to fix errors from it
