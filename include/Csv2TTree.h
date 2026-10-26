@@ -1,11 +1,12 @@
 #pragma once
 
 
-#ifndef CSV_2_TTREE_H
-#define CSV_2_TTREE_H
+#ifndef CSV_2_TTREE_H // delete these? since using pragma once...
+#define CSV_2_TTREE_H // delete these?
 
 #include <string>
 #include <vector>
+#include "DataPoint.h"
 
 namespace project {
 
