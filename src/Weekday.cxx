@@ -31,6 +31,20 @@ std::vector<DataPoint> year_filter(std::vector<DataPoint> datapoints,
     return filtered_points;
 };
 
+std::vector<DataPoint> weekend_filter(std::vector<DataPoint> datapoints) {
+    std::vector<DataPoint> filtered_points;
+    for (DataPoint dp : datapoints) {
+        int const weekday = dp.get_day_of_week();
+        if (weekday == 6 || weekday == 7) {
+            filtered_points.push_back(dp);
+        };
+    };
+    auto year = datapoints[0].get_year();
+    std::string output_filename = "weekends_in_" + std::to_string(year);
+
+    return filtered_points;
+}
+
 std::array<double, 7>
 average_temp_by_weekday(std::vector<DataPoint> datapoints) {
     // plot average temperature for each weekday
