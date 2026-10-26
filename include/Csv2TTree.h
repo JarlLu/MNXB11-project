@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef CSV_2_TTREE_H // delete these? since using pragma once...
-#define CSV_2_TTREE_H // delete these?
-
 #include "DataPoint.h"
 #include <string>
 #include <vector>
@@ -40,4 +37,3 @@ void to_root(std::vector<DataPoint> datapoints, std::string root_filename);
 // note: separated parse_csv_file and csv_to_root into two different functions
 // in case we want to clean up the data in-between at a later stage of code
 // development
-#endif /*CSV_2_TTREE_H*/
