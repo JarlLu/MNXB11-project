@@ -1,5 +1,6 @@
 #include "DataPoint.h"
 #include <sstream>
+#include <chrono>
 
 ClassImp(project::DataPoint);
 namespace project {
@@ -7,6 +8,7 @@ namespace project {
 
 
 DataPoint::DataPoint() : _date(""), _hour(-1),_day(0), _month(0),_year(0), _temperature(0.0), _quality(false) {}
+
 DataPoint::DataPoint(std::string date, int hour, double temperature, bool quality)
     : _date(date), _hour(hour), _temperature(temperature), _quality(quality) {
         _split_date();
@@ -32,6 +34,7 @@ double DataPoint::get_temperature() const {
 bool DataPoint::good_quality() const {
     return _quality;
 };
+
 void DataPoint::set_values(std::string date, int hour, double temperature, bool quality) {
     _date=date;
     _hour=hour;
@@ -51,6 +54,8 @@ void DataPoint::_split_date() {
     _month = std::stoi(month);
     _day = std::stoi(day);
 
+    _set_day_of_week();
+
 };
 
 int DataPoint::get_day() const {
@@ -65,6 +70,22 @@ int DataPoint::get_year() const {
     return _year;
 };
 
+void DataPoint::_set_day_of_week() {
+
+    std::chrono::year_moth_day date{
+        std::chrono::year{_year},
+        std::chrono::month{static_cast<unsigned>(_month)}, // std::chrono expects unsigned int values, hence static_cast
+        std::chrono::day{static_cast<unsigned>(_day)}
+    };
+
+    // set value -1 if date not valid
+    if (!date.ok()) { 
+        _day_of_week = -1
+    };
+
+    std::chrono::weekday wd{std::chrono::sys_days{date}};
+    _day_of_week = wd.iso_encoding();
+}
 
 } // namespace project
 
