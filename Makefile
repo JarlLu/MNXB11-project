@@ -13,7 +13,7 @@ LDFLAGS := $(shell root-config --libs)
 all: main
 
 
-main: main.cxx src/DataPointDict.cxx src/DataPoint.o src/Csv2TTree.o src/Dat2TTree.o src/climate_change.o src/monthly_coldest.o | DataPointDict_rdict.pcm
+main: main.cxx src/DataPointDict.cxx src/DataPoint.o src/Csv2TTree.o src/Dat2TTree.o src/climate_change.o src/monthly_coldest.o src/HottestDay.o | DataPointDict_rdict.pcm
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 src/%.o: src/%.cxx

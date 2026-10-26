@@ -24,23 +24,25 @@ We met up and made an outline on Monday Oct 19:
 - We will contact the course managers whether we need a presentation with slides 
 
 ## Extracting data from csv file and making root files with TTree 
-Responsible for task: Hanna
+*Responsible for task: Hanna*
+
+`DataPoint` class and `Csv2TTree` functions.
 
 ## Things we want to look at / analyze
 - One common script that reads csv files and saves data as ROOT files (Hanna is looking into that.)
 ### 1. Hottest weekend (Saturday + Sunday)
-Responsible for task: Hanna
+*Responsible for task: Hanna*
 
 ### 2. Hottest day of the week 
 Is there a correlation between day of the week and the temperature?
 
-Responsible for task: Hanna
+*Responsible for task: Hanna*
 
 ### 3. Coldest date each month
-Responsible for task: Yoline
+*Responsible for task: Yoline*
 
 ### 4. Climate change (Uppsala)
-Responsible for task: Jarl  
+*Responsible for task: Jarl*
 
 Will need separate data extraction code because of different file format. 
 ## SLURM
