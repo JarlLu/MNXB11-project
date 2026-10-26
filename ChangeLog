@@ -117,8 +117,8 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 
 2026-10-26 Hanna Palm <ha2684pa-s@student.lu.se>
 	Implemented code to plot average temperature for each day of the week (in a year) and made sure it worked
-	* Header file HottestDay.h
-	* Source file HottestDay.h
+	* Header file Weekday.h (previously called HottestDay)
+	* Source file Weekday.cxx (previously called HottestDay)
 		- added function to plot average temp weekday comparison for several years
 
 	* Updated main.cxx to include calling the plot function.
