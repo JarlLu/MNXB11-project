@@ -30,6 +30,7 @@ class DataPoint : public TObject {
         int get_day() const;
         int get_month() const;
         int get_year() const;
+        int get_day_of_week() const;
         void set_values(std::string date, int hour, double temperature, bool quality);
 
 

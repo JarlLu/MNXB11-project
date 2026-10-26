@@ -70,6 +70,10 @@ int DataPoint::get_year() const {
     return _year;
 };
 
+int DataPoint::get_day_of_week() const {
+    return _day_of_week;
+}
+
 void DataPoint::_set_day_of_week() {
 
     date::year_month_day date{
