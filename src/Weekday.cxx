@@ -1,4 +1,4 @@
-#include "HottestDay.h"
+#include "Weekday.h"
 
 #include <TAxis.h>
 #include <TCanvas.h>
@@ -8,11 +8,8 @@
 #include <THStack.h>
 #include <TLegend.h>
 #include <TPaveText.h>
-#include <TTree.h>
 
 #include <array>
-#include <iostream>
-#include <stdexcept>
 #include <string>
 #include <vector>
 
