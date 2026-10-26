@@ -109,4 +109,14 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	* succeeded to have the month...cxx file to produce a plot featuring multiple years 
 	NOTE: the code can handle as many years as liked but it becomes unreadable at 10 since the legend is in the way
 	* mananged to have an average of the days of all years 
+
+2026-10-26 Hanna Palm <ha2684pa-s@student.lu.se>
+	Implemented code to plot average temperature for each day of the week (in a year) and made sure it worked
+	* Header file HottestDay.h
+	* Source file HottestDay.h
+	* Updated main.cxx to include calling the plot function.
+
+	* cleaned up in Csv2Tree.cxx (removed old commented-out code)
+	* added _day_of_week attribute to DataPoint class.
+	* added _day_of_week getter for DataPoint class.
 	
