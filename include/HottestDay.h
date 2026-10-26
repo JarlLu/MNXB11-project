@@ -14,5 +14,5 @@ namespace project {
     std::array<double, 7> average_temp_by_weekday(std::vector<DataPoint> datapoints);
 
     void plot_average_temp_by_weekday(std::string csv_file_path, std::string output_file_name, int year);
-
+    void plot_av_temp_weekday_comparison(std::string csv_file_path, std::string output_file_name, std::vector<int> years);
 } // namespace project
