@@ -87,6 +87,18 @@ Have fun!
 
 # Examples
 
+## Before Running set up external library  
+1. Go to your home directory  
+cd ~/
+2. Create external library directory  
+mkdir -p external/include  
+3. Go into directory  
+cd external/include  
+4. Clone date library  
+git clone https://github.com/HowardHinnant/date.git date  
+
+
+
 
 ## How to run
 
@@ -147,3 +159,15 @@ using namespace project;
 
       return 0;
     }
+
+```
+## Running project as a SLURM job  
+1. Go to slurm directory  
+cd slurm/   
+2. Create job on cluster  
+sbatch project.sbatch   
+3. Output is found in slurm-(jobid).output  
+cat slurm-(jobid).output  
+
+
+
