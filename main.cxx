@@ -3,6 +3,7 @@
 #include "DataPoint.h"
 #include "Csv2TTree.h"
 #include "Dat2TTree.h"
+#include "allcities.h"
 #include "monthly_coldest.h"
 #include "climate_change.h"
 #include <iostream>
@@ -52,6 +53,7 @@ using namespace project;
     project::plot_av_temp_weekday_comparison("datasets/smhi-opendata_1_53430_20261007_164857_Lund.csv",
                                               "av_temp_weekday_comparison", {1980, 2000, 2020});
 
+std::cout << "\n*****************************\n";
     return 0; 
     
     }

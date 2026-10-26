@@ -110,6 +110,11 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	NOTE: the code can handle as many years as liked but it becomes unreadable at 10 since the legend is in the way
 	* mananged to have an average of the days of all years 
 
+2026-10-25 Jarl Olsson  <ja4886ol-s@student.lu.se>
+	Continued developement of climate change data analysis
+	*Added deviation from mean effect with red and blue points in plot if they are above/below the mean of all annual average temperatures (note:Unweighted mean where each year contributes equally to total mean)
+	*Cosmetic changes to plot with different line colors and a black line showing total mean.
+
 2026-10-26 Hanna Palm <ha2684pa-s@student.lu.se>
 	Implemented code to plot average temperature for each day of the week (in a year) and made sure it worked
 	* Header file HottestDay.h
@@ -122,3 +127,13 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	* added _day_of_week attribute to DataPoint class.
 	* added _day_of_week getter for DataPoint class.
 	
+
+2026-10-26 Jarl Olsson  <ja4886ol-s@student.lu.se>
+	Updated slurm script
+	*Increased memory allocation to 400M 
+	*added unset XAUTHORITY to fix errors from it
+	Updated Makefile and buildproject.sh
+	*Changed so that main target gets .o files instead of just the .cxx files also changed the order so that the root dictionary gets created first.
+	*Changed make command in buildproject.sh to always recompile with -B flag.
+
+
