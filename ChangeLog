@@ -95,4 +95,18 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	*Updated Makefile to include src/climate_change.cxx
 	*Added moving averages to the analysis and to the average temperature plot
 
+2026-10-24 Yoline Ruiter <yo0302ru-s@student.lu.se>
+	* Increased compatibility with existing csv2tree and datapoint files in monthly_coldest.cxx 
+	* resolved some issues with finding the input file in main and monthly_coldest.cxx
 
+2026-10-24 Yoline Ruiter <yo0302ru-s@student.lu.se>
+	* resolved all compatibility issues
+	* changed file direcory path and improved readability main
+	* changed void in header to be compatible with cxx
+	* created a two new testfiles for lund 
+	* resolved running issues with csv2tree
+	* succeeded to have the month...cxx file to produce a plot featuring one year 
+	* succeeded to have the month...cxx file to produce a plot featuring multiple years 
+	NOTE: the code can handle as many years as liked but it becomes unreadable at 10 since the legend is in the way
+	* mananged to have an average of the days of all years 
+	
