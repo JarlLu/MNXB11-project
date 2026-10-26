@@ -18,9 +18,16 @@
 
 namespace project {
 
+/**
+ * @brief Filters out DataPoints for a given year.
+ *
+ * @param datapoints
+ * @param year
+ * @return std::vector<DataPoint>
+ */
 std::vector<DataPoint> year_filter(std::vector<DataPoint> datapoints,
                                    int year) {
-    // selects data from one year only
+    /** */
     std::vector<DataPoint> filtered_points;
 
     for (DataPoint dp : datapoints) {
@@ -31,6 +38,12 @@ std::vector<DataPoint> year_filter(std::vector<DataPoint> datapoints,
     return filtered_points;
 };
 
+/**
+ * @brief Calculates the average temperature for each day of the week.
+ *
+ * @param datapoints
+ * @return std::array<double, 7>
+ */
 std::array<double, 7>
 average_temp_by_weekday(std::vector<DataPoint> datapoints) {
     // plot average temperature for each weekday
@@ -62,7 +75,14 @@ average_temp_by_weekday(std::vector<DataPoint> datapoints) {
     };
     return weekday_average;
 };
-
+/**
+ * @brief Create histogram of average temperature for each day of the week (one
+ * year)
+ *
+ * @param csv_file_path
+ * @param output_file_name
+ * @param year
+ */
 void plot_average_temp_by_weekday(std::string csv_file_path,
                                   std::string output_file_name, int year) {
     std::vector<DataPoint> datapoints = parse_csv_file(csv_file_path);
@@ -121,6 +141,14 @@ void plot_average_temp_by_weekday(std::string csv_file_path,
     delete hist;
 };
 
+/**
+ * @brief Create histogram of average temperature for each day of the week
+ * (multiple years)
+ *
+ * @param csv_file_path
+ * @param output_file_name
+ * @param years
+ */
 void plot_av_temp_weekday_comparison(std::string csv_file_path,
                                      std::string output_file_name,
                                      std::vector<int> years) {
