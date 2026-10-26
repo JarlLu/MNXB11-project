@@ -37,6 +37,21 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	* Source code CSv2Ttree.cxx
 	- It takes a csv file path and saves entries into a TTree format, output file .root
 
+2026-10-21 Jarl Olsson  <ja4886ol-s@student.lu.se>
+	Started creating the .dat file to TTree in .root file converter  
+	*Header file Dat2TTree.h  
+	*Source code Dat2TTree.cxx  
+
+2026-10-22 Jarl Olsson  <ja4886ol-s@student.lu.se>
+	Implemented custom constructor for uppsala dataset   
+	*Header file DataPoint.h  
+	*Source code Datapoint.cxx  
+	
+	Finished implementing the .dat file to TTree in .root file converter.
+	*saving date, temperature and placeholder quality in TTree
+	*updated main function to create .root file from uppsala dataset
+
+	
 2026-10-22 Hanna Palm <ha2684pa-s@student.lu.se>
 	Updated Csc2TTree.cxx to ignore metadata. 
 	* Looping over metadata lines in beginning of file and only saves data given after the header.
@@ -46,4 +61,52 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	* Added getters for _day, _month and _year. 
 	* Updated Csv2TTree.cxx to create branches for day, month and year and store that data.
 	- Note: seems to be writing root file properly but year parameter might be wrong. So check when we have root reader!
+2026-10-22 Yoline Ruiter <yo0302ru-s@student.lu.se>
+	Created and updated monthly_coldest.C 
+	 * created and optimized the code to find minimum using arrays which creates 12 monthlytrees and monthlyfiles
+	 * checks if input is valid 
+	 * creates scatter plot to see correlation 
+	 - Note: File is .C and has to be converted to cxx 
+2026-10-23 Jarl Olsson  <ja4886ol-s@student.lu.se>
+	Changed DataPoint class to inherit from TObject and made Dat2TTree store instances of DataPoint rather than individual branches.
+	*Created include/LinkDef.h and updated Makefile to create dictionary for DataPoint class
+	*Updated DataPoint class to have default constructor and setter
+	*Updated Dat2TTree.cxx to store instances of DataPoint rather than seperate branches for date, temperature and quality.
+	*Updated Csv2TTree.cxx to also store instance of DataPoint.
 
+	Started on data analysis of climate change task.
+	*Created include/climate_change.h and src/climate_change.cxx and added basic structure to them.
+
+2026-10-23 Yoline Ruiter <yo0302ru-s@student.lu.se>
+	Changed .C to cxx and created a header file and main command 
+	* monthly_coldest.h defines void 
+	* main contains the command for initializing monthly_coldest.cxx
+	Started formatting and writing the paper in Overleaf and altered code so that the code is expected to be able to: 
+	* Read imput root file and retreives data tree
+	* Find the lowest good quality temperature for each month 
+	* Create 12 monthly root files 
+	* Createa scattes plot 
+
+2026-10-24 Jarl Olsson  <ja4886ol-s@student.lu.se>
+	Implemented first generation of climate_change data analysis
+	*Added function for calculating average temperature of given year
+	*Added function for generating plot over the average temperature from 1722-2022
+	*Updated main.cxx to include call to climate_change function which so far just opens root data file and calls the average temperature plot function
+	*Updated Makefile to include src/climate_change.cxx
+	*Added moving averages to the analysis and to the average temperature plot
+
+2026-10-24 Yoline Ruiter <yo0302ru-s@student.lu.se>
+	* Increased compatibility with existing csv2tree and datapoint files in monthly_coldest.cxx 
+	* resolved some issues with finding the input file in main and monthly_coldest.cxx
+
+2026-10-24 Yoline Ruiter <yo0302ru-s@student.lu.se>
+	* resolved all compatibility issues
+	* changed file direcory path and improved readability main
+	* changed void in header to be compatible with cxx
+	* created a two new testfiles for lund 
+	* resolved running issues with csv2tree
+	* succeeded to have the month...cxx file to produce a plot featuring one year 
+	* succeeded to have the month...cxx file to produce a plot featuring multiple years 
+	NOTE: the code can handle as many years as liked but it becomes unreadable at 10 since the legend is in the way
+	* mananged to have an average of the days of all years 
+	

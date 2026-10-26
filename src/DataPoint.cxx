@@ -1,12 +1,18 @@
 #include "DataPoint.h"
 #include <sstream>
 
+ClassImp(project::DataPoint);
 namespace project {
 
+
+
+DataPoint::DataPoint() : _date(""), _hour(-1),_day(0), _month(0),_year(0), _temperature(0.0), _quality(false) {}
 DataPoint::DataPoint(std::string date, int hour, double temperature, bool quality)
     : _date(date), _hour(hour), _temperature(temperature), _quality(quality) {
         _split_date();
     } 
+
+DataPoint::DataPoint(std::string date, double temperature) : _date(date), _hour(-1), _temperature(temperature), _quality(true) {_split_date();}
 
 // TODO: implement an input parameter check to make sure parameters are valid
 
@@ -26,7 +32,13 @@ double DataPoint::get_temperature() const {
 bool DataPoint::good_quality() const {
     return _quality;
 };
-
+void DataPoint::set_values(std::string date, int hour, double temperature, bool quality) {
+    _date=date;
+    _hour=hour;
+    _temperature=temperature;
+    _quality=quality;
+    _split_date();
+}
 
 void DataPoint::_split_date() {
     std::stringstream ss(_date);
