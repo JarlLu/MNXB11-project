@@ -13,7 +13,16 @@ namespace project {
  * @param datapoints
  * @return std::array<double, 7>
  */
-std::vector<DataPoint> year_filter(DataPoint datapoint, int year);
+std::vector<DataPoint> year_filter(std::vector<DataPoint> datapoints, int year);
+
+/**
+ * @brief Filters out weekend (Saturday + Sunday) DataPoints
+ *
+ * @param datapoints
+ * @param years
+ * @return std::vector<DataPoint>
+ */
+std::vector<DataPoint> weekend_filter(std::vector<DataPoint> datapoints);
 
 /**
  * @brief Calculates the average temperature for each day of the week.
