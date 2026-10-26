@@ -3,6 +3,7 @@
 #include "DataPoint.h"
 #include "Csv2TTree.h"
 #include "Dat2TTree.h"
+#include "allcities.h"
 #include "monthly_coldest.h"
 #include "climate_change.h"
 #include <iostream>
@@ -40,14 +41,38 @@ using namespace project;
     std::cout << "Month: " << point.get_month() << "\n";
     std::cout << "Day: " << point.get_day() << "\n";
 
-    //Monthly_coldest
-    std::cout << "\n*****************************\n";
-    std::cout << "Starting monthly coldest analysis..."<< std::endl;
-    project::csv_to_root("./datasets/testdata/LUND2015-2025.csv", "./datasets/rootfiles/LUND2015-2025.root");
-    project::monthly_coldest("./datasets/rootfiles/LUND2015-2025.root");
-    std::cout << "Monthly coldest analysis has finished!" << std::endl;
-    std::cout << "\n*****************************\n";
+    
+    // Monthly_coldest
+std::cout << "\n*****************************\n";
+std::cout << "Starting monthly coldest analysis..." << std::endl;
 
+const char* cities[] = {
+    "LUND",
+    "UPPSALA",
+    "KARLSTAD",
+    "HALMSTAD"
+};
+
+for (const char* city : cities) {
+    std::string csv_file =
+        "./datasets/data_" + std::string(city) + "2020-2025.csv";
+
+    std::string root_file =
+        "./datasets/rootfiles/data_" + std::string(city) + "2020-2025.root";
+
+    std::cout << "\nProcessing " << city << "..." << std::endl;
+
+    project::csv_to_root(csv_file, root_file);
+    project::monthly_coldest(root_file);
+}
+
+std::cout << "\nMonthly coldest analysis has finished!" << std::endl;
+
+allcities();
+
+std::cout << "\nFinished making a 2x2 figure!" << std::endl;
+
+std::cout << "\n*****************************\n";
     return 0; 
     
     }
