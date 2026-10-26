@@ -12,7 +12,7 @@
 using namespace project;
   int main() {
 
-    project::csv_to_root("datasets/testdata/testdata3.csv", "datasets/rootfiles/testroot3.root" );
+    project::csv_to_root("datasets/smhi-opendata_1_52230_20261007_165001_Falsterbo.csv", "datasets/rootfiles/testrootFalsterbo.root" );
     
     TFile file("/home/hannap/mnxb11/MNXB11-project/datasets/rootfiles/testroot3.root", "READ");
     file.ls();
