@@ -13,8 +13,11 @@ LDFLAGS := $(shell root-config --libs)
 all: main
 
 
-main: main.cxx src/DataPoint.cxx src/Csv2TTree.cxx src/Dat2TTree.cxx src/climate_change.cxx src/monthly_coldest.cxx src/DataPointDict.cxx | DataPointDict_rdict.pcm
+main: main.cxx src/DataPointDict.cxx src/DataPoint.o src/Csv2TTree.o src/Dat2TTree.o src/climate_change.o src/monthly_coldest.o | DataPointDict_rdict.pcm
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
+
+src/%.o: src/%.cxx
+	$(CXX) $(CXXFLAGS) $^ -c -o $@
 
 src/DataPointDict.cxx: include/DataPoint.h include/LinkDef.h
 	rootcling -f $@ -I$(ROOTINCLUDES) -Iinclude include/DataPoint.h include/LinkDef.h
@@ -23,4 +26,4 @@ DataPointDict_rdict.pcm: src/DataPointDict.cxx
 	cp src/DataPointDict_rdict.pcm $@
 
 clean:
-	rm -f main src/*.o src/DataPointDict.cxx src/DataPointDict_rdict.pcm DataPointDict_rdict.pcm src/DataPointDict.rootmap
+	rm -vf main src/*.o src/DataPointDict.cxx src/DataPointDict_rdict.pcm DataPointDict_rdict.pcm 
