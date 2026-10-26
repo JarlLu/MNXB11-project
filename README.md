@@ -147,3 +147,15 @@ using namespace project;
 
       return 0;
     }
+
+
+## Running project as a SLURM job  
+1. Go to slurm directory 
+cd slurm/ 
+2. Create job on cluster
+sbatch project.sbatch 
+3. Output is found in slurm-(jobid).output
+cat slurm-(jobid).output
+
+
+
