@@ -41,4 +41,9 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	Updated Csc2TTree.cxx to ignore metadata. 
 	* Looping over metadata lines in beginning of file and only saves data given after the header.
 
+	Updated DataPoint class by adding private methods + new private variables
+	* _split_date() private setter for _year, _month and _day using info from _date.
+	* Added getters for _day, _month and _year. 
+	* Updated Csv2TTree.cxx to create branches for day, month and year and store that data.
+	- Note: seems to be writing root file properly but year parameter might be wrong. So check when we have root reader!
 
