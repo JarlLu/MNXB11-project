@@ -119,3 +119,8 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	Updated slurm script
 	*Increased memory allocation to 400M 
 	*added unset XAUTHORITY to fix errors from it
+	Updated Makefile and buildproject.sh
+	*Changed so that main target gets .o files instead of just the .cxx files also changed the order so that the root dictionary gets created first.
+	*Changed make command in buildproject.sh to always recompile with -B flag.
+
+

@@ -18,4 +18,4 @@ fi
 
 # Build the main, assuming Makefile is in the current path
 echo "Starting build..."
-startmnxb11container.sh make
+startmnxb11container.sh "make -B"
