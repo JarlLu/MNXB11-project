@@ -1,24 +1,43 @@
 #pragma once
 
-
 #ifndef CSV_2_TTREE_H // delete these? since using pragma once...
 #define CSV_2_TTREE_H // delete these?
 
+#include "DataPoint.h"
 #include <string>
 #include <vector>
-#include "DataPoint.h"
 
 namespace project {
 
-    std::vector<DataPoint> parse_csv_file(std::string csvfile_path);
-    
-    // writes data from csv file into ROOT Ttree structure and saves as .root file
-    void csv_to_root(std::string csvfile_path, std::string output_filename);
+/**
+ * @brief parse csv file
+ *
+ * @param csvfile_path
+ * @return std::vector<DataPoint>
+ */
+std::vector<DataPoint> parse_csv_file(std::string csvfile_path);
 
+/**
+ * @brief writes data from csv file into ROOT Ttree structure and saves as .root
+ file
+
+ *
+ * @param csvfile_path
+ * @param output_filename
+ */
+void csv_to_root(std::string csvfile_path, std::string output_filename);
+
+/**
+ * @brief Writes vector of DataPoints to ROOT file
+ *
+ * @param datapoints
+ * @param root_filename
+ */
+void to_root(std::vector<DataPoint> datapoints, std::string root_filename);
 
 } // namespace project
 
-
-// note: separated parse_csv_file and csv_to_root into two different functions in case
-// we want to clean up the data in-between at a later stage of code development
+// note: separated parse_csv_file and csv_to_root into two different functions
+// in case we want to clean up the data in-between at a later stage of code
+// development
 #endif /*CSV_2_TTREE_H*/
