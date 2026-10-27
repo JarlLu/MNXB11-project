@@ -31,6 +31,20 @@ std::vector<DataPoint> year_filter(std::vector<DataPoint> datapoints,
     return filtered_points;
 };
 
+std::vector<DataPoint> weekend_filter(std::vector<DataPoint> datapoints) {
+    std::vector<DataPoint> filtered_points;
+    for (DataPoint dp : datapoints) {
+        int const weekday = dp.get_day_of_week();
+        if (weekday == 6 || weekday == 7) {
+            filtered_points.push_back(dp);
+        };
+    };
+    auto year = datapoints[0].get_year();
+    std::string output_filename = "weekends_in_" + std::to_string(year);
+
+    return filtered_points;
+}
+
 std::array<double, 7>
 average_temp_by_weekday(std::vector<DataPoint> datapoints) {
     // plot average temperature for each weekday
@@ -112,8 +126,8 @@ void plot_average_temp_by_weekday(std::string csv_file_path,
 
     info->Draw();
 
-    std::string output_file_path = "images/hannas_plots/" + output_file_name +
-                                   "_" + std::to_string(year) + ".png";
+    std::string output_file_path =
+        "images/" + output_file_name + "_" + std::to_string(year) + ".png";
     canvas->Update();
     canvas->SaveAs(output_file_path.c_str());
 
@@ -225,8 +239,7 @@ void plot_av_temp_weekday_comparison(std::string csv_file_path,
     legend->Draw();
     canvas->Modified();
     canvas->Update();
-    std::string output_file_path =
-        "images/hannas_plots/" + output_file_name + ".png";
+    std::string output_file_path = "images/" + output_file_name + ".png";
     canvas->SaveAs(output_file_path.c_str());
 
     delete legend;

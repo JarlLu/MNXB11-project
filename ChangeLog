@@ -126,6 +126,7 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	* cleaned up in Csv2Tree.cxx (removed old commented-out code)
 	* added _day_of_week attribute to DataPoint class.
 	* added _day_of_week getter for DataPoint class.
+	* Added weekday filter to Weekday
 	
 
 2026-10-26 Jarl Olsson  <ja4886ol-s@student.lu.se>
