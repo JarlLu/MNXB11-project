@@ -18,7 +18,7 @@
 
 using namespace project;
 int main() {
-    /*project::csv_to_root(
+    project::csv_to_root(
         "datasets/smhi-opendata_1_52230_20261007_165001_Falsterbo.csv",
         "datasets/rootfiles/testrootFalsterbo.root");
 
@@ -54,7 +54,7 @@ int main() {
     project::monthly_coldest("./datasets/rootfiles/LUND2015-2025.root");
     std::cout << "Monthly coldest analysis has finished!" << std::endl;
     std::cout << "\n*****************************\n";
-*/
+
     project::plot_av_temp_weekday_comparison(
         "datasets/smhi-opendata_1_53430_20261007_164857_Lund.csv",
         "av_temp_weekday_comparison", {1980, 2000, 2020});
