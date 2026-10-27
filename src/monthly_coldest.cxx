@@ -1,27 +1,25 @@
 #include "monthly_coldest.h"
 #include "DataPoint.h"
 
-#include <TFile.h>
-#include <TTree.h>
-#include <TGraph.h>
-#include <TCanvas.h>
 #include <TAxis.h>
-#include <TString.h>
-#include <TLegend.h>
+#include <TCanvas.h>
+#include <TFile.h>
+#include <TGraph.h>
 #include <TH1F.h>
+#include <TLegend.h>
+#include <TString.h>
+#include <TTree.h>
 
-#include <cstdio>
+#include <TLatex.h>
 #include <algorithm>
+#include <cmath>
+#include <cstdio>
 #include <iostream>
-#include <string>
-#include <vector>
 #include <limits>
 #include <map>
-#include <utility> 
-#include <cmath> 
-#include <TLatex.h>
-
-
+#include <string>
+#include <utility>
+#include <vector>
 
 namespace project {
 void monthly_coldest(std::string root_file_path) {
@@ -50,13 +48,13 @@ void monthly_coldest(std::string root_file_path) {
     
     // from project namespace, create pointer to DataPoint object as nullpointer -- will be used later on 
     project::DataPoint* datapoint = nullptr;
-    //Create a datapoint object that will store the data 
+    // Create a datapoint object that will store the data
     project::DataPoint outPoint;
  
     //connect the datapoint branch in the tree to the datapoint pointer  and store the memory adress if valid, give error if cannot be done 
     if (tree->SetBranchAddress("datapoint", &datapoint) < 0) {
-        std::cerr << "cannot read branch datapoint :( ! \n"; 
-        root_file -> Close();
+        std::cerr << "cannot read branch datapoint :( ! \n";
+        root_file->Close();
         return;
     }
 
@@ -65,7 +63,8 @@ void monthly_coldest(std::string root_file_path) {
     std::cout << "Tree entries: " << tree->GetEntries() << '\n';
     tree->Print();
 
-    // ------------- FIND THE LOWEST TEMPERATURE FOR ALL MONTHS, WITH GOOD QUALITY -------------------
+    // ------------- FIND THE LOWEST TEMPERATURE FOR ALL MONTHS, WITH GOOD
+    // QUALITY -------------------
 
     //create struct ~ group of related variables; stores information about the coldest day
     //initial values given below; these are the default variables 
@@ -141,8 +140,7 @@ for (int m = 0; m < 12; ++m)
             
             //cleanup all monthly files opened and current path for all previous loops if something went wrong 
             for (int j = 0; j <= m; ++j) {
-                if (monthFiles[j]) 
-                {
+                if (monthFiles[j]) {
                     monthFiles[j]->Close();
                     delete monthFiles[j];
                 }
@@ -163,7 +161,6 @@ for (int m = 0; m < 12; ++m)
         // create branch that stores output data as the same format as input data 
         monthTrees[m]->Branch("datapoint", &outPoint);
     }
-    
 
     // -----------------------------WRITE THE FILES AND FILL THE TREES WITH COLDEST DATA --------------------------
     for (int m = 0; m < 12; ++m) 
@@ -250,7 +247,6 @@ for (const auto& entry : coldest) {
         //each year different color 
         ++colorIndex;
     }
-}
 
 // --------------------------------------------- FILL EACH YEARS GRAPH -----------------------------------
 //create anotther map now having the number of datapoints -- each year <year, pointrcount> 
@@ -330,7 +326,6 @@ for (int m = 0; m < 12; ++m) {
         // Count this month as a valid month
         numberOfMonths++;
     }
-}
 
 // Calculate the mean if at least one month has valid data - mean is calculated as average of averages 
 if (numberOfMonths > 0) {
@@ -461,3 +456,4 @@ root_file->Close();
 std::cout << "Finished! Coldest-day scatter plot saved in monthrootfiles" << std::endl;
 }
 }
+} // namespace project

@@ -1,9 +1,9 @@
-#include <allcities.h> 
 #include <TCanvas.h>
 #include <TImage.h>
 #include <TLatex.h>
-#include <iostream>
 #include <TPad.h>
+#include <allcities.h>
+#include <iostream>
 
 void allcities() {
     //we make a big canvas -- the title does not matter 
@@ -21,8 +21,7 @@ void allcities() {
         "datasets/monthrootfiles/monthly_coldest_LUND.png",
         "datasets/monthrootfiles/monthly_coldest_UPPSALA.png",
         "datasets/monthrootfiles/monthly_coldest_KARLSTAD.png",
-        "datasets/monthrootfiles/monthly_coldest_HALMSTAD.png"
-    };
+        "datasets/monthrootfiles/monthly_coldest_HALMSTAD.png"};
 
     for (int i = 0; i < 4; ++i) {
         //resolves a root pad issue 
@@ -31,8 +30,7 @@ void allcities() {
 
         //if not valid 
         if (!image) {
-            std::cerr << "Could not open image: "
-                      << filenames[i] << '\n';
+            std::cerr << "Could not open image: " << filenames[i] << '\n';
             continue;
         }
         //draw without frame 
