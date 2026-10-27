@@ -47,18 +47,33 @@ int main() {
     std::cout << "Day: " << point.get_day() << "\n";
 
     // Monthly_coldest
-    std::cout << "\n*****************************\n";
-    std::cout << "Starting monthly coldest analysis..." << std::endl;
-    project::csv_to_root("./datasets/testdata/LUND2015-2025.csv",
-                         "./datasets/rootfiles/LUND2015-2025.root");
-    project::monthly_coldest("./datasets/rootfiles/LUND2015-2025.root");
-    std::cout << "Monthly coldest analysis has finished!" << std::endl;
-    std::cout << "\n*****************************\n";
+std::cout << "\n*****************************\n";
+std::cout << "Starting monthly coldest analysis..." << std::endl;
 
-    project::plot_av_temp_weekday_comparison(
-        "datasets/smhi-opendata_1_53430_20261007_164857_Lund.csv",
-        "av_temp_weekday_comparison", {1980, 2000, 2020});
+// use array and pointers pointing to c string 
+const char* cities[] = {
+    "LUND",
+    "UPPSALA",
+    "KARLSTAD",
+    "HALMSTAD"
+};
 
-    std::cout << "\n*****************************\n";
-    return 0;
+for (const char* city : cities) {
+    //loop though all city names 
+    std::string csv_file = "./datasets/data_" + std::string(city) + "2020-2025.csv";
+    std::string root_file = "./datasets/rootfiles/data_" + std::string(city) + "2020-2025.root";
+
+    std::cout << "\nProcessing " << city << "..." << std::endl;
+    //take files as input 
+    project::csv_to_root(csv_file, root_file);
+    project::monthly_coldest(root_file);
+}
+
+std::cout << "\nMonthly coldest analysis has finished!" << std::endl;
+//create the mega plot 
+allcities();
+
+std::cout << "\nFinished making a 2x2 figure!" << std::endl;
+std::cout << "\n*****************************\n";
+    return 0; 
 }
