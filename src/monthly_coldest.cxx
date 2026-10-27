@@ -247,7 +247,7 @@ for (const auto& entry : coldest) {
         //each year different color 
         ++colorIndex;
     }
-
+}
 // --------------------------------------------- FILL EACH YEARS GRAPH -----------------------------------
 //create anotther map now having the number of datapoints -- each year <year, pointrcount> 
 std::map<int, int> pointCounts;
@@ -332,7 +332,7 @@ if (numberOfMonths > 0) {
     // Divide the sum of monthly averages by the number of valid months
     meanOfAverages = sumAverages / numberOfMonths;
 }
-
+}
 // -------------------- CALCULATING THE STANDARD DEVIATION --------------------
 
 // Define variables for calculating the standard deviation
@@ -454,6 +454,5 @@ delete averageGraph;
 root_file->Close();
 
 std::cout << "Finished! Coldest-day scatter plot saved in monthrootfiles" << std::endl;
-}
 }
 } // namespace project
