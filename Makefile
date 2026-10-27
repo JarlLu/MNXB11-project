@@ -12,7 +12,6 @@ LDFLAGS := $(shell root-config --libs)
 
 all: main
 
-
 main: main.cxx src/DataPoint.cxx src/Csv2TTree.cxx src/Dat2TTree.cxx src/climate_change.cxx src/monthly_coldest.cxx src/allcities.cxx src/DataPointDict.cxx | DataPointDict_rdict.pcm
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 

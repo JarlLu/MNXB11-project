@@ -46,6 +46,7 @@ using namespace project;
 std::cout << "\n*****************************\n";
 std::cout << "Starting monthly coldest analysis..." << std::endl;
 
+// use array and pointers pointing to c string 
 const char* cities[] = {
     "LUND",
     "UPPSALA",
@@ -54,24 +55,21 @@ const char* cities[] = {
 };
 
 for (const char* city : cities) {
-    std::string csv_file =
-        "./datasets/data_" + std::string(city) + "2020-2025.csv";
-
-    std::string root_file =
-        "./datasets/rootfiles/data_" + std::string(city) + "2020-2025.root";
+    //loop though all city names 
+    std::string csv_file = "./datasets/data_" + std::string(city) + "2020-2025.csv";
+    std::string root_file = "./datasets/rootfiles/data_" + std::string(city) + "2020-2025.root";
 
     std::cout << "\nProcessing " << city << "..." << std::endl;
-
+    //take files as input 
     project::csv_to_root(csv_file, root_file);
     project::monthly_coldest(root_file);
 }
 
 std::cout << "\nMonthly coldest analysis has finished!" << std::endl;
-
+//create the mega plot 
 allcities();
 
 std::cout << "\nFinished making a 2x2 figure!" << std::endl;
-
 std::cout << "\n*****************************\n";
     return 0; 
     
