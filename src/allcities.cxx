@@ -6,14 +6,17 @@
 #include <iostream>
 
 void allcities() {
-
+    //we make a big canvas -- the title does not matter 
     TCanvas* canvas = new TCanvas(
-        "combined_canvas", "Monthly Coldest Days - Four Cities", 1600, 1200);
-
-    // Leave space at the top for one overall title.
-    canvas->SetTopMargin(0.08);
+        "combined_canvas",
+        "Monthly Coldest Days - Four Cities",
+        1600, 1200
+    );
+    
+        // Divide the canvas into four pads
     canvas->Divide(2, 2);
 
+    //each element is pointer to c style string using an array of 4
     const char* filenames[4] = {
         "datasets/monthrootfiles/monthly_coldest_LUND.png",
         "datasets/monthrootfiles/monthly_coldest_UPPSALA.png",
@@ -21,22 +24,19 @@ void allcities() {
         "datasets/monthrootfiles/monthly_coldest_HALMSTAD.png"};
 
     for (int i = 0; i < 4; ++i) {
+        //resolves a root pad issue 
         canvas->cd(i + 1);
-
         TImage* image = TImage::Open(filenames[i]);
 
+        //if not valid 
         if (!image) {
             std::cerr << "Could not open image: " << filenames[i] << '\n';
             continue;
         }
-
+        //draw without frame 
         image->Draw("x");
     }
 
-    // Draw one overall title on the main canvas.
-    canvas->cd();
-
     canvas->SaveAs("datasets/monthrootfiles/all_cities_2x2.png");
-
     delete canvas;
 }
