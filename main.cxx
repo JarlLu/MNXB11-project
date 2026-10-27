@@ -50,6 +50,8 @@ int main() {
 std::cout << "\n*****************************\n";
 std::cout << "Starting monthly coldest analysis..." << std::endl;
 
+
+
 // use array and pointers pointing to c string 
 const char* cities[] = {
     "LUND",
@@ -58,16 +60,35 @@ const char* cities[] = {
     "HALMSTAD"
 };
 
+
+
+for (const char* city : cities) {
+    std::string csv_file = "./datasets/data_" + std::string(city) + "2020-2025.csv";
+
+    // to_root() adds "datasets/" and ".root" automatically
+    std::string root_file = "rootfiles/data_" + std::string(city) + "2020-2025";
+
+    std::cout << "\nProcessing " << city << "..." << std::endl;
+
+    // Create datasets/rootfiles/data_CITY2020-2025.root
+    project::csv_to_root(csv_file, root_file);
+
+    // Open the actual file, including its directory and extension
+    project::monthly_coldest("./datasets/" + root_file + ".root");
+}
+
+/*
 for (const char* city : cities) {
     //loop though all city names 
     std::string csv_file = "./datasets/data_" + std::string(city) + "2020-2025.csv";
-    std::string root_file = "./datasets/rootfiles/data_" + std::string(city) + "2020-2025.root";
+    std::string root_file = "rootfiles/data_" + std::string(city) + "2020-2025";
 
     std::cout << "\nProcessing " << city << "..." << std::endl;
     //take files as input 
     project::csv_to_root(csv_file, root_file);
     project::monthly_coldest(root_file);
 }
+*/
 
 std::cout << "\nMonthly coldest analysis has finished!" << std::endl;
 //create the mega plot 
