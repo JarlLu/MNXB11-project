@@ -1,17 +1,14 @@
-#include <allcities.h> 
 #include <TCanvas.h>
 #include <TImage.h>
 #include <TLatex.h>
-#include <iostream>
 #include <TPad.h>
+#include <allcities.h>
+#include <iostream>
 
 void allcities() {
 
     TCanvas* canvas = new TCanvas(
-        "combined_canvas",
-        "Monthly Coldest Days - Four Cities",
-        1600, 1200
-    );
+        "combined_canvas", "Monthly Coldest Days - Four Cities", 1600, 1200);
 
     // Leave space at the top for one overall title.
     canvas->SetTopMargin(0.08);
@@ -21,8 +18,7 @@ void allcities() {
         "datasets/monthrootfiles/monthly_coldest_LUND.png",
         "datasets/monthrootfiles/monthly_coldest_UPPSALA.png",
         "datasets/monthrootfiles/monthly_coldest_KARLSTAD.png",
-        "datasets/monthrootfiles/monthly_coldest_HALMSTAD.png"
-    };
+        "datasets/monthrootfiles/monthly_coldest_HALMSTAD.png"};
 
     for (int i = 0; i < 4; ++i) {
         canvas->cd(i + 1);
@@ -30,8 +26,7 @@ void allcities() {
         TImage* image = TImage::Open(filenames[i]);
 
         if (!image) {
-            std::cerr << "Could not open image: "
-                      << filenames[i] << '\n';
+            std::cerr << "Could not open image: " << filenames[i] << '\n';
             continue;
         }
 
@@ -41,10 +36,7 @@ void allcities() {
     // Draw one overall title on the main canvas.
     canvas->cd();
 
-
-    canvas->SaveAs(
-        "datasets/monthrootfiles/all_cities_2x2.png"
-    );
+    canvas->SaveAs("datasets/monthrootfiles/all_cities_2x2.png");
 
     delete canvas;
 }
