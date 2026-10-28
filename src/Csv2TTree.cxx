@@ -1,8 +1,7 @@
 #include "Csv2TTree.h"
+#include "DataPoint.h"
 
-#include <TF1.h>
 #include <TFile.h>
-#include <TString.h>
 #include <TTree.h>
 
 #include <fstream>
@@ -10,8 +9,6 @@
 #include <sstream>
 #include <string>
 #include <vector>
-
-#include "DataPoint.h"
 
 namespace project {
 
