@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DataPoint.h"
+#include <array>
 #include <string>
 #include <vector>
 
