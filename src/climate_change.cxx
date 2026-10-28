@@ -202,7 +202,8 @@ void plot_average_temperature(TTree* tree, int first_year, int last_year,
     moving_average_20_graph->Draw("L SAME");
 
     // Create and draw legend in top right of canvas
-    TLegend* legend = new TLegend(0.65, 0.75, 0.88, 0.88);
+    TLegend* legend = new TLegend(0.55, 0.74, 0.90, 0.89);
+    legend->SetTextSize(0.03);
     legend->AddEntry(hot_graph, "Annual average over total average", "p");
     legend->AddEntry(cold_graph, "Annual average below total average", "p");
     legend->AddEntry(reference_line, "Total Average");
