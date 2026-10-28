@@ -364,7 +364,6 @@ void plot_weekday_temp_trends(std::string csv_file_path,
                          "Mean Temperature (#circC)");
 
     multigraph->Draw("A");
-    multigraph->GetXaxis()->LabelsOption("v");
 
     multigraph->GetXaxis()->SetLimits(years.front() - 0.5, years.back() + 0.5);
 
@@ -399,7 +398,7 @@ void plot_weekday_temp_trends(std::string csv_file_path,
 
     canvas->SaveAs(output_file_path.c_str());
 
-    std::cout << "canvas saved!\n";
+    std::cout << "The temperature trend plot has been saved\n";
 
     // Clean up.
     delete legend;
