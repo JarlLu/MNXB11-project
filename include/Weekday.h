@@ -1,7 +1,7 @@
 #pragma once
 
 #include "DataPoint.h"
-#include <TTree.h>
+#include <array>
 #include <string>
 #include <vector>
 
@@ -34,8 +34,7 @@ std::array<double, 7>
 average_temp_by_weekday(std::vector<DataPoint> datapoints);
 
 /**
- * @brief Create histogram of average temperature for each day of the week (one
- * year)
+ * @brief Calculates average temperature for each day of the week.
  *
  * @param csv_file_path
  * @param output_file_name
