@@ -54,4 +54,15 @@ void plot_average_temp_by_weekday(std::string csv_file_path,
 void plot_av_temp_weekday_comparison(std::string csv_file_path,
                                      std::string output_file_name,
                                      std::vector<int> years);
+
+/**
+ * @brief Plots the average temperature for each weekday over a longer period.
+ *
+ * @param csv_file_path
+ * @param output_file_name
+ * @param years
+ */
+void plot_weekday_temp_trends(std::string csv_file_path,
+                              std::string output_file_name,
+                              std::vector<int> years);
 } // namespace project
