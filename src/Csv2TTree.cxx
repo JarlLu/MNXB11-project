@@ -1,8 +1,7 @@
 #include "Csv2TTree.h"
+#include "DataPoint.h"
 
-#include <TF1.h>
 #include <TFile.h>
-#include <TString.h>
 #include <TTree.h>
 
 #include <fstream>
@@ -10,8 +9,6 @@
 #include <sstream>
 #include <string>
 #include <vector>
-
-#include "DataPoint.h"
 
 namespace project {
 
@@ -104,7 +101,8 @@ std::vector<DataPoint> parse_csv_file(std::string csvfile_path) {
 
 void to_root(std::vector<DataPoint> datapoints, std::string output_filename) {
     // create the output root file
-    std::string root_filepath = "datasets/" + output_filename + ".root";
+    std::string root_filepath =
+        "datasets/rootfiles" + output_filename + ".root";
     TFile output(root_filepath.c_str(), "RECREATE");
     // RECREATE creates new file or overwrites existing ones -- warning!
     // .c_str converts std::string to the c-style string that ROOT expects

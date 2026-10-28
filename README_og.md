@@ -115,6 +115,8 @@ cd scripts/
 ```
 **Note:** `runproject.sh` runs the executable `main` so any code you want to run should be written in `main.cxx`. Or change which executable it runs. That works too :) Also make sure that paths are correct! Keep in mind that you cannot open a file that doesn't exist so generate ROOT file first and then open that ROOT file, must be in correct order.
 
+
+# Examples
 ## DataPoint class
 
 ```cpp 

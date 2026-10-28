@@ -4,6 +4,7 @@
 #include <TPad.h>
 #include <allcities.h>
 #include <iostream>
+#include <TDatime.h>
 
 void allcities() {
     //we make a big canvas -- the title does not matter 
@@ -36,6 +37,13 @@ void allcities() {
         //draw without frame 
         image->Draw("x");
     }
+
+    TDatime now;
+    TLatex timestamp;
+    timestamp.SetNDC();
+    timestamp.SetTextSize(0.025);
+    timestamp.SetTextColor(kGray + 2);
+    timestamp.DrawLatex(0.02, 0.01, now.AsString());
 
     canvas->SaveAs("datasets/monthrootfiles/all_cities_2x2.png");
     delete canvas;
