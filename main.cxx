@@ -72,6 +72,14 @@ for (const char* city : cities) {
     // calling function
     project::plot_av_temp_weekday_comparison(csv_file_path, output_plot_name,
                                              years);
+    std::vector<int> years2;
+
+    for (int year2 = 2006; year2 <= 2025; ++year2) {
+        years2.push_back(year2);
+    }
+
+    project::plot_weekday_temp_trends(csv_file_path, "weekday_temp_trends",
+                                      years2);
 
     std::cout << "Weekday analysis is finished!" << std::endl;
     std::cout << "\n*************************************\n";
