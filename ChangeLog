@@ -138,4 +138,6 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	*Changed make command in buildproject.sh to always recompile with -B flag.
 	Removed date.h from our git repository and instead set it up as an external library
 
-
+2026-10-28 Jarl Olsson  <ja4886ol-s@student.lu.se>
+	Bugfixed missing directories on git
+	*The directories datasets/rootfiles and datasets/monthrootfiles were previously removed from git since they were emptied out of their rootfile contents but they still needed to exist, so READMEs were added.
