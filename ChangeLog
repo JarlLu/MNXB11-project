@@ -140,6 +140,8 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 
 2026-10-28 Hanna Palm <ha2684pa-s@student.lu.se>
 	
+	Implemented temperature trend plot in Weeday module
 	* Cleaned up code in main.cxx (removed sanity check leftovers)
 	* Improved error handling in Csv2Tree module
+	* Updated Weekday part of main.cxx
 
