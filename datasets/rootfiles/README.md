@@ -1,0 +1,1 @@
+This directory stores rootfiles created by and used by our project code.

@@ -21,9 +21,9 @@ int main() {
 
     std::cout << "\n*****************************\n";
     std::cout << "Climate change analysis starting\n";
-    project::dat_to_root_TTree("./datasets/uppsala_tm_1722-2022.dat",
-                               "./datasets/rootfiles/uppsala_1722-2022.root");
-    project::climate_change("./datasets/rootfiles/uppsala_1722-2022.root");
+    project::dat_to_root_TTree("datasets/uppsala_tm_1722-2022.dat",
+                               "datasets/rootfiles/uppsala_1722-2022.root");
+    project::climate_change("datasets/rootfiles/uppsala_1722-2022.root");
     std::cout << "Climate change analysis finished\n";
     std::cout << "\n*****************************\n";
 
