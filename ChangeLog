@@ -116,6 +116,16 @@ YYYY-MM-DD Name LastName  <email@somewhere>
   (note:Unweighted mean where each year contributes equally to total mean)
 	*Cosmetic changes to plot with different line colors and a black line showing total mean.
 
+2026-10-25 Yoline Ruiter <yo0302ru-s@student.lu.se>
+	* Added the required header to testfile 
+	* Removed autosafe in monthly_coldest.cxx & Resolved tab issue Makefile 
+	* Structured main Added Namespace in monthly_coldest.cxx
+	* changed input to root_file 
+	* added debug comments
+	* tested with 3 year plot and tested with 6 year plot
+	* started implementning maps & restucturing code 
+	
+
 2026-10-26 Hanna Palm <ha2684pa-s@student.lu.se>
 	Implemented code to plot average temperature for each day of the week (in a year) and made sure it worked
 	* Header file Weekday.h (previously called HottestDay)
@@ -139,10 +149,30 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	*Changed make command in buildproject.sh to always recompile with -B flag.
 	Removed date.h from our git repository and instead set it up as an external library
 
+
+2026-10-26 Yoline Ruiter <yo0302ru-s@student.lu.se>
+	* Added datasets of 6 years for 4 places
+	* Added allcities.cxx and allcities.h 
+	* Added places to main with manual on off switch
+
+
+2026-10-27 Yoline Ruiter <yo0302ru-s@student.lu.se>
+	* Added descrptions and did refomatting of code
+	* resolved issues with git 
+	* updated main and resolved bracket issue in monthly_coldest.cxx
+
+
 2026-10-28 Jarl Olsson  <ja4886ol-s@student.lu.se>
 	Bugfixed missing directories on git
 	*The directories datasets/rootfiles and datasets/monthrootfiles were previously removed from git since they were emptied out of their rootfile contents but they still needed to exist,
   so READMEs were added.
+
+2026-10-28 Yoline Ruiter <yo0302ru-s@student.lu.se>
+	* Added instructions readme 
+	* Resolved error in main
+	* Created monthrootfiles
+	* Added timestamp to allcities.cxx 
+	* Resolved building issue 
   
 2026-10-28 Hanna Palm <ha2684pa-s@student.lu.se>
 	
@@ -151,3 +181,6 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 	* Improved error handling in Csv2Tree module
 	* Updated Weekday part of main.cxx
 
+2026-10-29 Yoline Ruiter <yo0302ru-s@student.lu.se>
+	* Resolved issue with root file directory
+	* changed changelog 
