@@ -45,6 +45,6 @@ void allcities() {
     timestamp.SetTextColor(kGray + 2);
     timestamp.DrawLatex(0.02, 0.01, now.AsString());
 
-    canvas->SaveAs("datasets/monthrootfiles/all_cities_2x2.png");
+    canvas->SaveAs("images/all_cities_2x2.png");
     delete canvas;
 }

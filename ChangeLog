@@ -183,4 +183,5 @@ YYYY-MM-DD Name LastName  <email@somewhere>
 
 2026-10-29 Yoline Ruiter <yo0302ru-s@student.lu.se>
 	* Resolved issue with root file directory
-	* changed changelog 
+	* Changed path of final output image 
+	* Changed changelog 
