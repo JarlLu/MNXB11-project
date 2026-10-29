@@ -40,7 +40,7 @@ for (const char* city : cities) {
     std::string csv_file = "./datasets/data_" + city_name + "2020-2025.csv";
 
     // to_root() adds "datasets/" and ".root" automatically
-    std::string root_file = "data_" + city_name + "2020-2025";
+    std::string root_file = "/data_" + city_name + "2020-2025";
 
     std::cout << "\nProcessing " << city_name << "..." << std::endl;
 
