@@ -35,18 +35,20 @@ int main() {
     const char* cities[] = {"LUND", "UPPSALA", "KARLSTAD", "HALMSTAD"};
 
 for (const char* city : cities) {
-    std::string csv_file = "./datasets/data_" + std::string(city) + "2020-2025.csv";
+    std::string city_name = city;
+
+    std::string csv_file = "./datasets/data_" + city_name + "2020-2025.csv";
 
     // to_root() adds "datasets/" and ".root" automatically
-    std::string root_file = "rootfiles/data_" + std::string(city) + "2020-2025";
+    std::string root_file = "data_" + city_name + "2020-2025";
 
-    std::cout << "\nProcessing " << city << "..." << std::endl;
+    std::cout << "\nProcessing " << city_name << "..." << std::endl;
 
     // Create datasets/rootfiles/data_CITY2020-2025.root
     project::csv_to_root(csv_file, root_file);
 
     // Open the actual file, including its directory and extension
-    project::monthly_coldest("./datasets/" + root_file + ".root");
+    project::monthly_coldest("datasets/rootfiles/" + root_file + ".root");
 }
 
 
