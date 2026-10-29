@@ -124,7 +124,6 @@ cd slurm/
 sbatch project.sbatch   
 3. Output is found in slurm-(jobid).output  
 cat slurm-(jobid).output  
-4. Optional - open allcities.png
-xdg-open ../datasets/monthrootfiles/all_cities_2x2.png
+
 
 
